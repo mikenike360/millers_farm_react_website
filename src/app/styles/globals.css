@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Override for out-of-range cells */
+.rbc-off-range-bg {
+  background-color: #b7e6ec !important; /* A light cyan shade, for example */
+  opacity: 0.8; /* Adjust opacity if needed */
+}
+
+.rbc-today {
+  background-color: #74e1f0 !important; /* A light cyan shade, for example */
+  opacity: 0.8; /* Adjust opacity if needed */
+}
+
+.react-datepicker__input-container input::placeholder {
+  color: white !important;
+  opacity: 1 !important;
+}
+
+

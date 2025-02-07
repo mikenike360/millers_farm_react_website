@@ -1,101 +1,202 @@
+"use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Carousel from "./components/Carousel";
+import { supabase } from "./components/supabaseClient"; // Adjust path if needed
+import Link from "next/link";
+import { FaSearch, FaCalendarAlt, FaUsers, FaMapMarkerAlt } from "react-icons/fa";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  // State for storing reservations fetched from Supabase
+  const [reservations, setReservations] = useState<any[]>([]);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const [reservationType, setReservationType] = useState("Wedding");
+
+  const [checkIn, setCheckIn] = useState(null);
+  const [checkOut, setCheckOut] = useState(null);
+
+  // Booking form state
+  const [location, setLocation] = useState("");
+
+  const [guests, setGuests] = useState(1);
+
+  // Fetch reservations on component mount
+  useEffect(() => {
+    async function fetchReservations() {
+      const { data, error } = await supabase.from("bookings").select("*");
+      if (error) {
+        console.error("Error fetching reservations:", error);
+      } else {
+        setReservations(data);
+      }
+    }
+    fetchReservations();
+  }, []);
+
+  return (
+    <div className="flex flex-col">
+      {/* Hero Section */}
+      <div
+        className="h-screen md:h-[700px]"
+        style={{
+          backgroundImage: "url('hero_bg.jpeg')", // Ensure the path is correct and image is in /public
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+
+      
+      {/* Hero Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center text-center text-white px-6 h-full">
+        <h1 className="text-5xl font-bold font-serif mb-5 drop-shadow-lg">
+          Welcome to Miller's Farm!
+        </h1>
+        <p className="text-md mb-5 font-bold font-serif leading-relaxed drop-shadow-lg max-w-lg mx-auto">
+          Where rustic charm meets timeless elegance. Celebrate life’s most cherished moments amidst rolling hills and serene waterfront views, creating an unforgettable countryside experience.
+        </p>
+
+        {/* Booking Form */}
+        <div className="flex flex-col items-center gap-4 w-fit mx-auto">
+    
+
+            {/* Inputs Wrapper */}
+            <div className="flex flex-wrap gap-4 w-full justify-center">
+              
+              {/* Check-In Date */}
+              <div className="bg-neutral text-black rounded-lg shadow-md p-3 flex items-center gap-2 w-fit">
+                <FaCalendarAlt className="text-white" />
+                <DatePicker
+                  selected={checkIn}
+                  onChange={(date) => setCheckIn(date)}
+                  className="appearance-none outline-none bg-neutral text-white px-3 py-2 rounded-md border-0 focus:border-primary focus:ring-2 focus:ring-primary w-36"
+                  placeholderText="Check-In"
+                />
+              </div>
+
+              {/* Check-Out Date */}
+              <div className="bg-neutral text-white rounded-lg shadow-md p-3 flex items-center gap-2 w-fit">
+                <FaCalendarAlt className="text-white" />
+                <DatePicker
+                  selected={checkOut}
+                  onChange={(date) => setCheckOut(date)}
+                  className="appearance-none outline-none bg-neutral text-white px-3 py-2 rounded-md border-0 focus:border-primary focus:ring-2 focus:ring-primary w-36"
+                  placeholderText="Check-Out"
+                />
+              </div>
+
+              {/* Reservation Type Dropdown */}
+              <div className="bg-neutral rounded-lg shadow-md p-3 flex items-center gap-2 w-fit relative">
+                <FaUsers className="" />
+                <select
+                  value={reservationType}
+                  onChange={(e) => setReservationType(e.target.value)}
+                  className="appearance-none outline-none bg-neutral px-3 py-2 rounded-md border-0 focus:border-primary focus:ring-2 focus:ring-primary w-48"
+                >
+                  <option value="Wedding">Wedding</option>
+                  <option value="Engagement Party">Engagement Party</option>
+                  <option value="Birthday Party">Birthday Party</option>
+                  <option value="Anniversary Celebration">Anniversary Celebration</option>
+                  <option value="Baby Shower">Baby Shower</option>
+                  <option value="Family Reunion">Family Reunion</option>
+                  <option value="Graduation Party">Graduation Party</option>
+                  <option value="Live Music Event">Live Music Event</option>
+                  <option value="Concert">Concert</option>
+                  <option value="Fundraiser">Fundraiser</option>
+                  <option value="Private Dinner">Private Dinner</option>
+                  <option value="Food Tasting">Food Tasting</option>
+                  <option value="Art Exhibition">Art Exhibition</option>
+                  <option value="Other">Fashion Show</option>
+                </select>
+                {/* Custom Dropdown Arrow */}
+                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none text-white">
+                  ▼
+                </span>
+              </div>
+
+            </div>
+
+            {/* Search Button */}
+            <button className="bg-button bg-neutral hover:bg-primary text-white px-6 py-2 rounded-lg flex items-center shadow-md ml-[-60px]">
+              <FaSearch className="mr-2" /> Book Now!
+            </button>
+
+          </div>
+
+
+
+
+
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+      {/* About / Features Section */}
+      <section className="py-10 px-4 bg-base-100">
+        <h2 className="text-3xl font-bold text-center mb-8">Why Choose Us?</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="card bg-base-200 shadow-xl">
+            <div className="card-body">
+              <h3 className="card-title">Rustic Charm</h3>
+              <p>Our historic barn and countryside setting provide the perfect romantic backdrop for your special day.</p>
+            </div>
+          </div>
+          <div className="card bg-base-200 shadow-xl">
+            <div className="card-body">
+              <h3 className="card-title">Waterfront Views</h3>
+              <p>Enjoy a tranquil, scenic view from our private island location, offering both land and water backdrops.</p>
+            </div>
+          </div>
+          <div className="card bg-base-200 shadow-xl">
+            <div className="card-body">
+              <h3 className="card-title">Personalized Service</h3>
+              <p>Our dedicated team is here to make planning effortless, ensuring your wedding day is truly unforgettable.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Carousel Section */}
+      <section className="bg-base-200 py-10 px-4">
+        <h2 className="text-3xl font-bold text-center mb-8">What Our Couples Say</h2>
+        <div className="max-w-4xl mx-auto">
+          <Carousel />
+        </div>
+      </section>
+
+      {/* Reservations List Section (Supabase Data) */}
+      <section className="py-10 px-4 bg-base-200">
+        <h2 className="text-3xl font-bold text-center mb-8">Current Reservations</h2>
+        <div className="max-w-lg mx-auto">
+          {reservations.length === 0 ? (
+            <p className="text-center">No reservations found.</p>
+          ) : (
+            <ul className="list-disc pl-5">
+              {reservations.map((res) => (
+                <li key={res.id} className="mb-2">
+                  <strong>{res.name}</strong> reserved on{" "}
+                  {new Date(res.start_date).toLocaleDateString()} to{" "}
+                  {new Date(res.end_date).toLocaleDateString()}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </section>
+
+      {/* Call to Action / Contact Section */}
+      <section className="bg-primary text-primary-content py-10 text-center">
+        <div className="max-w-lg mx-auto">
+          <h2 className="text-3xl font-bold mb-4">Ready to Tie the Knot?</h2>
+          <p className="mb-6">
+            Schedule a tour, request more information, or reserve your date to make your dream wedding a reality.
+          </p>
+          <button className="btn btn-secondary">Contact Us</button>
+        </div>
+      </section>
     </div>
   );
 }
