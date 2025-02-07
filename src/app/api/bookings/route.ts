@@ -1,12 +1,20 @@
-// src/app/api/bookings/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "../../components/supabaseClient";
+
+interface BookingData {
+  start: string; // Ensure start date is a string
+  end: string;   // Ensure end date is a string
+}
 
 export async function POST(req: NextRequest) {
   const { newBookings, name, email, phone, notes } = await req.json();
 
-  // Convert each booking's start and end to ISO strings
-  const insertData = newBookings.map((b: any) => ({
+  // Ensure newBookings is an array of BookingData
+  if (!Array.isArray(newBookings)) {
+    return NextResponse.json({ error: "Invalid booking data" }, { status: 400 });
+  }
+
+  const insertData = newBookings.map((b: BookingData) => ({
     title: `${name}'s Reservation`,
     start_date: new Date(b.start).toISOString(),
     end_date: new Date(b.end).toISOString(),
@@ -20,10 +28,9 @@ export async function POST(req: NextRequest) {
   const { data, error } = await supabase.from("bookings").insert(insertData);
 
   if (error) {
-    // Log the error for debugging
     console.error("Supabase Insert Error:", error.message);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
+
   return NextResponse.json({ success: true, bookings: data });
 }
-

@@ -5,6 +5,7 @@ import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-thumbnail.css";
 import { supabase } from "../components/supabaseClient";
+import Image from "next/image"; 
 
 export default function GalleryPage() {
   const [images, setImages] = useState<string[]>([]);
@@ -44,14 +45,9 @@ export default function GalleryPage() {
             return null;
           }
 
-          const { data: publicUrlData, error: urlError } = supabase.storage
+          const { data: publicUrlData } = supabase.storage
             .from("millers_farm_images")
             .getPublicUrl(file.name);
-
-          if (urlError) {
-            console.warn(`Error generating URL for ${file.name}:`, urlError);
-            return null;
-          }
 
           console.log(`Generated URL for ${file.name}:`, publicUrlData.publicUrl);
           return publicUrlData.publicUrl;
@@ -89,10 +85,13 @@ export default function GalleryPage() {
                   key={index}
                   className="block"
                 >
-                  <img
+                  <Image
                     src={src}
+                    width={400}  // Adjust as needed
+                    height={300} // Adjust as needed
                     className="w-full h-48 object-cover rounded-lg shadow-md"
                     alt={`Gallery Image ${index + 1}`}
+                    unoptimized // 
                   />
                 </a>
               );
