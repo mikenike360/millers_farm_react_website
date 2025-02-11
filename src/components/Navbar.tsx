@@ -20,8 +20,8 @@ export default function Navbar() {
           <Image 
             src="/logo.png" 
             alt="Miller's Farm Logo"
-            width={180} // Adjust as needed
-            height={180} // Adjust as needed
+            width={120} // Adjust as needed
+            height={120} // Adjust as needed
             className="h-auto w-auto object-contain" 
             priority // Ensures the logo loads fast
           />
