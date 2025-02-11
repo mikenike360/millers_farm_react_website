@@ -1,7 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Carousel from "@/components/Carousel";
-import { supabase } from "@/components/supabaseClient";
 import { FaSearch, FaCalendarAlt, FaUsers } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -16,7 +15,7 @@ interface Reservation {
 
 export default function Home() {
   //  Use strongly typed state instead of `any[]`
-  const [reservations, setReservations] = useState<Reservation[]>([]);
+  const [reservations] = useState<Reservation[]>([]);
   const [reservationType, setReservationType] = useState("Wedding");
   const [checkIn, setCheckIn] = useState<Date | null>(null);
   const [checkOut, setCheckOut] = useState<Date | null>(null);
