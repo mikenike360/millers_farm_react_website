@@ -11,8 +11,8 @@ import {
 import { format, parse, startOfWeek, getDay } from "date-fns";
 import { enUS } from "date-fns/locale/en-US";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { supabase } from "../components/supabaseClient";
-import AlertModal from "../components/AlertModal";
+import { supabase } from "@/components/supabaseClient";
+import AlertModal from "@/components/AlertModal";
 
 interface BookingEvent extends Event {
   confirmed: boolean;
@@ -83,7 +83,7 @@ export default function ReservationPage() {
       start: startDate!,
       end: endDate!,
       allDay: true,
-      confirmed: false, // ✅ Fix: Include 'confirmed' to match BookingEvent type
+      confirmed: false, //  Fix: Include 'confirmed' to match BookingEvent type
     };
 
     const response = await fetch("/api/bookings", {

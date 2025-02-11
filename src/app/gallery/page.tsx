@@ -1,49 +1,56 @@
 import React from "react";
-import { supabase } from "../components/supabaseClient";
-import Gallery from "../components/Gallery"; // Import the Client Component
+import { supabase } from "@/components/supabaseClient";
+import MyLightboxGallery from "@/components/Gallery"; // Import our client component
 
-//  Server-side Data Fetching (App Router)
-async function getImages() {
+async function getImages(): Promise<{ thumbnail: string; full: string }[]> {
   const { data, error } = await supabase.storage
     .from("millers_farm_images")
     .list("", {
       limit: 100,
-      offset: 0,
       sortBy: { column: "name", order: "asc" },
     });
 
   if (error) {
-    console.error("Error fetching images:", error);
+    console.error("Supabase error:", error);
     return [];
   }
 
-  return (
-    data
-      ?.map((file) => {
-        if (!file.name) return null;
-        const { data: publicUrlData } = supabase.storage
-          .from("millers_farm_images")
-          .getPublicUrl(file.name);
-        return publicUrlData.publicUrl;
-      })
-      .filter((url): url is string => Boolean(url)) || []
-  );
+  if (!data || !Array.isArray(data)) {
+    console.warn("Invalid data from Supabase:", data);
+    return [];
+  }
+
+  const images = data
+    .map((file) => {
+      if (!file.name) return null;
+
+      //  Generate full-size URL
+      const { data: fullUrlData } = supabase.storage
+        .from("millers_farm_images")
+        .getPublicUrl(file.name);
+
+      //  Supabase image transformation: resize dynamically (200x150)
+      const thumbnailUrl = `${fullUrlData.publicUrl}?width=200&height=150&resize=cover`;
+
+      return {
+        thumbnail: thumbnailUrl,  // Dynamically resized thumbnail
+        full: fullUrlData?.publicUrl || "",
+      };
+    })
+    .filter((img): img is { thumbnail: string; full: string } => Boolean(img?.full));
+
+  console.log("Final Image URLs:", images);
+  return images;
 }
 
+
+
 export default async function GalleryPage() {
-  const images = await getImages(); // Fetch images on the server
+  const images = await getImages();
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-100 py-10">
-      <h1 className="text-4xl font-bold text-gray-800 mb-6">Gallery</h1>
-
-      {images.length === 0 ? (
-        <p className="text-lg text-red-600">
-          No images found. Please check your Supabase bucket.
-        </p>
-      ) : (
-        <Gallery images={images} /> //  Use the Client Component
-      )}
+    <div>
+      <MyLightboxGallery images={images} />
     </div>
   );
 }

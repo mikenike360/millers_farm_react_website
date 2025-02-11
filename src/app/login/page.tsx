@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { supabase } from "../components/supabaseClient";
+import { supabase } from "@/components/supabaseClient";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {

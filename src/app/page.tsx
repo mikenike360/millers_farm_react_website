@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Carousel from "./components/Carousel";
-import { supabase } from "./components/supabaseClient";
+import Carousel from "@/components/Carousel";
+import { supabase } from "@/components/supabaseClient";
 import { FaSearch, FaCalendarAlt, FaUsers } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-// ✅ Define a TypeScript interface for reservations
+//  Define a TypeScript interface for reservations
 interface Reservation {
   id: string;
   name: string;
@@ -15,24 +15,13 @@ interface Reservation {
 }
 
 export default function Home() {
-  // ✅ Use strongly typed state instead of `any[]`
+  //  Use strongly typed state instead of `any[]`
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [reservationType, setReservationType] = useState("Wedding");
   const [checkIn, setCheckIn] = useState<Date | null>(null);
   const [checkOut, setCheckOut] = useState<Date | null>(null);
 
-  // Fetch reservations on component mount
-  useEffect(() => {
-    async function fetchReservations() {
-      const { data, error } = await supabase.from("bookings").select("*");
-      if (error) {
-        console.error("Error fetching reservations:", error);
-      } else {
-        setReservations(data as Reservation[]); // ✅ Type assertion
-      }
-    }
-    fetchReservations();
-  }, []);
+
 
   return (
     <div className="flex flex-col">

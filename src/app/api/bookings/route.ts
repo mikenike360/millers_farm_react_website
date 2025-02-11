@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "../../components/supabaseClient";
+import { supabase } from "@/components/supabaseClient";
 
 interface BookingData {
   start: string; // Ensure start date is a string

@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { supabase } from "../components/supabaseClient"; // Adjust path if necessary
+import { supabase } from "@/components/supabaseClient"; // Adjust path if necessary
 import { useRouter } from "next/navigation";
 
 const ADMIN_EMAILS = ["michael.venema2010@gmail.com"]; // List your admin emails
