@@ -36,7 +36,7 @@ const config: Config = {
   },
   plugins: [daisyui],
   daisyui: {
-    themes: ["aqua", "dark"],
+    themes: ["valentine", "synthwave"],
   },
 };
 
