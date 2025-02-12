@@ -14,11 +14,11 @@ export default function Navbar() {
 
   return (
     <div className="navbar fixed top-0 left-0 w-full z-50 shadow-lg bg-gradient-to-r from-primary to-secondary text-primary-content 
-                    backdrop-blur-md bg-opacity-80 transition-colors duration-300 -mt-3 py-0">
+                    backdrop-blur-md bg-opacity-80 transition-colors duration-300 py-0">
       <div className="container mx-auto px-4 flex items-center justify-between">
-        {/* Left Side: Logo and Navigation Links */}
-        <div className="flex items-center py-0">
-          {/* Mobile Dropdown (hamburger icon) */}
+        {/* Left Section: Mobile Hamburger and Desktop Logo */}
+        <div className="flex items-center">
+          {/* Mobile: Hamburger icon (visible on small screens only) */}
           <div className="dropdown lg:hidden">
             <label tabIndex={0} className="btn btn-ghost btn-circle">
               <svg
@@ -36,7 +36,7 @@ export default function Navbar() {
                 />
               </svg>
             </label>
-            {/* Dropdown Menu */}
+            {/* Mobile Dropdown Menu */}
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 text-base-content rounded-box w-52"
@@ -67,9 +67,8 @@ export default function Navbar() {
               </li>
             </ul>
           </div>
-
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 ml-2 py-0">
+          {/* Desktop: Logo on left (visible on md and up) */}
+          <Link href="/" className="hidden md:flex items-center gap-2 ml-2 py-0">
             <Image
               src="/logo.png"
               alt="Miller's Farm Logo"
@@ -79,9 +78,23 @@ export default function Navbar() {
               priority
             />
           </Link>
+        </div>
 
-          {/* Desktop Navigation Links (visible only on large screens) */}
-          <div className="hidden lg:flex ml-6">
+        {/* Center Section: Mobile Logo or Desktop Navigation Links */}
+        <div className="flex-1 flex justify-center">
+          {/* Mobile: Centered Logo (visible only on small screens) */}
+          <Link href="/" className="block md:hidden">
+            <Image
+              src="/logo.png"
+              alt="Miller's Farm Logo"
+              width={100}
+              height={100}
+              className="object-contain hover:scale-105 transition-transform duration-300 w-24"
+              priority
+            />
+          </Link>
+          {/* Desktop: Navigation Links (visible on large screens) */}
+          <div className="hidden lg:block">
             <ul className="menu menu-horizontal px-1">
               <li>
                 <Link href="/">Home</Link>
@@ -111,7 +124,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Right Side: Theme Toggle */}
+        {/* Right Section: Theme Toggle */}
         <div className="flex items-center">
           <button
             onClick={toggleTheme}
