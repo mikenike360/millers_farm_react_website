@@ -37,7 +37,7 @@ export default function Home() {
         {/* Hero Content */}
         <div className="relative z-10 flex flex-col items-center justify-center text-center text-white px-6 h-full">
           <h1 className="text-5xl font-bold font-serif mb-5 drop-shadow-lg">
-            Welcome to Miller&apos;s Farm!
+            Welcome to Miller&apos;s Hill Farm!
           </h1>
           <p className="text-md mb-5 font-bold font-serif leading-relaxed drop-shadow-lg max-w-lg mx-auto">
             Where rustic charm meets timeless elegance. Celebrate life’s most
