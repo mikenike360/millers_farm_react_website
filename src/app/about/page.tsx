@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { MapPinIcon, CakeIcon, BriefcaseIcon, SparklesIcon } from "@heroicons/react/24/solid";
 
 export default function About() {
@@ -11,9 +12,11 @@ export default function About() {
       <div className="flex flex-col md:flex-row items-center justify-center mb-14 gap-10">
         <div className="card w-96 bg-primary text-primary-content shadow-xl hover:shadow-2xl transition duration-300">
           <figure>
-            <img
+            <Image
               src="/owner.jpg"
               alt="Owner Barbara Miller"
+              width={224} // Adjust width (56 * 4)
+              height={224} // Adjust height (56 * 4)
               className="w-56 h-56 object-cover rounded-full border-4 border-accent mt-4"
             />
           </figure>
@@ -24,9 +27,11 @@ export default function About() {
           </div>
         </div>
 
-        <img
+        <Image
           src="/island.jpg"
           alt="Lummi Island, WA"
+          width={800} // Adjust width
+          height={500} // Adjust height
           className="w-full md:w-1/2 h-auto object-cover rounded-lg shadow-xl transition-transform duration-300 hover:scale-105"
         />
       </div>

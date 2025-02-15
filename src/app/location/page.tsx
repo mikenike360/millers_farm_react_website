@@ -6,7 +6,7 @@ const LocationPage: React.FC = () => {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Miller's Farm Island Weddings",
+    "name": "Miller&rsquo;s Farm Island Weddings",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "2206 Tuttle Lane",
@@ -17,7 +17,6 @@ const LocationPage: React.FC = () => {
     },
     "geo": {
       "@type": "GeoCoordinates",
-      // Update these coordinates if you have precise ones
       "latitude": "48.8100",
       "longitude": "-122.6600"
     },
@@ -28,10 +27,10 @@ const LocationPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Our Location - Miller's Farm Island Weddings</title>
+        <title>Our Location - Miller&rsquo;s Farm Island Weddings</title>
         <meta
           name="description"
-          content="Visit Miller's Farm Island Weddings on Lummi Island, WA. Find our address, directions, and contact information for your next wedding or event."
+          content="Visit Miller&rsquo;s Farm Island Weddings on Lummi Island, WA. Find our address, directions, and contact information for your next wedding or event."
         />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://millersfarmislandweddings.com/location" />
@@ -48,8 +47,8 @@ const LocationPage: React.FC = () => {
       <main style={{ maxWidth: '800px', margin: '0 auto', padding: '8rem' }}>
         <h1>Our Location</h1>
         <p>
-          Welcome to Miller's Farm Island Weddings! Our beautiful venue is located on Lummi Island, Washington.
-          Below you'll find our address, directions, and a map to help you plan your visit.
+          Welcome to Miller&rsquo;s Farm Island Weddings! Our beautiful venue is located on Lummi Island, Washington.
+          Below you&rsquo;ll find our address, directions, and a map to help you plan your visit.
         </p>
 
         <section>
