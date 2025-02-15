@@ -4,10 +4,10 @@ import { useState } from "react";
 import Image from "next/image";
 
 export default function Navbar() {
-  const [theme, setTheme] = useState("valentine");
+  const [theme, setTheme] = useState("light");
 
   const toggleTheme = () => {
-    const newTheme = theme === "valentine" ? "synthwave" : "valentine";
+    const newTheme = theme === "light" ? "dark  " : "light";
     setTheme(newTheme);
     document.documentElement.setAttribute("data-theme", newTheme);
   };
@@ -65,6 +65,9 @@ export default function Navbar() {
               <li>
                 <Link href="/contact">Contact</Link>
               </li>
+              <li>
+                <Link href="/location">Location</Link>
+              </li>
             </ul>
           </div>
           {/* Desktop: Logo on left (visible on md and up) */}
@@ -120,6 +123,9 @@ export default function Navbar() {
               <li>
                 <Link href="/contact">Contact</Link>
               </li>
+              <li>
+                <Link href="/location">Location</Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -131,7 +137,7 @@ export default function Navbar() {
             className="btn btn-ghost btn-circle transition-transform hover:scale-110"
             aria-label="Toggle Theme"
           >
-            {theme === "valentine" ? (
+            {theme === "light" ? (
               /* Dark icon */
               <svg
               xmlns="http://www.w3.org/2000/svg"

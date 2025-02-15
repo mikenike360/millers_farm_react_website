@@ -10,6 +10,22 @@ interface MyLightboxGalleryProps {
   images: { thumbnail: string; full: string }[];
 }
 
+// Helper function to convert filename to descriptive alt text
+const getAltTextFromFilename = (url: string): string => {
+  // Extract the file name from the URL
+  const filename = url.split('/').pop() || "";
+  // Remove the file extension
+  const nameWithoutExtension = filename.replace(/\.[^/.]+$/, "");
+  // Replace underscores with spaces
+  const nameWithSpaces = nameWithoutExtension.replace(/_/g, " ");
+  // Capitalize each word
+  const capitalized = nameWithSpaces
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+  return `Miller's Hill Farm - ${capitalized}`;
+};
+
 export default function MyLightboxGallery({ images = [] }: MyLightboxGalleryProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -28,7 +44,7 @@ export default function MyLightboxGallery({ images = [] }: MyLightboxGalleryProp
     <div className="min-h-screen bg-gradient-to-b from-white via-brandGray to-gray-200 py-10">
       <div className="mx-auto max-w-screen-lg px-4">
         {/* Heading Section */}
-        <h2 className="text-4xl font-extrabold text-gray-800 text-center mb-2">
+        <h2 className="text-4xl font-extrabold text-gray-800 text-center mb-2 mt-12">
           Our Beautiful Gallery
         </h2>
         <p className="text-center text-gray-600 mb-8">
@@ -51,7 +67,7 @@ export default function MyLightboxGallery({ images = [] }: MyLightboxGalleryProp
               {/* Thumbnail Image */}
               <Image
                 src={thumbnail}
-                alt={`Thumbnail ${index + 1}`}
+                alt={getAltTextFromFilename(thumbnail)}
                 width={0}
                 height={0}
                 sizes="100vw"
