@@ -13,8 +13,11 @@ export default function Navbar() {
   };
 
   return (
-    <div className="navbar fixed top-0 left-0 w-full z-50 shadow-lg bg-gradient-to-r from-primary to-secondary text-primary-content 
-                    backdrop-blur-md bg-opacity-80 transition-colors duration-300 py-0">
+<div className="navbar fixed top-0 left-0 w-full z-50 shadow-lg 
+                bg-gradient-to-r from-red-400 to-orange-200 text-primary-content 
+                backdrop-blur-md bg-opacity-80 transition-colors duration-300 py-0">
+
+
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Left Section: Mobile Hamburger and Desktop Logo */}
         <div className="flex items-center">
@@ -39,7 +42,7 @@ export default function Navbar() {
             {/* Mobile Dropdown Menu */}
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 text-base-content rounded-box w-52"
+              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 text-base-content rounded-box w-52 text-bold"
             >
               <li>
                 <Link href="/">Home</Link>
@@ -98,7 +101,7 @@ export default function Navbar() {
           </Link>
           {/* Desktop: Navigation Links (visible on large screens) */}
           <div className="hidden lg:block">
-            <ul className="menu menu-horizontal px-1">
+            <ul className="menu menu-horizontal text-black text-bold px-1">
               <li>
                 <Link href="/">Home</Link>
               </li>
@@ -134,7 +137,7 @@ export default function Navbar() {
         <div className="flex items-center">
           <button
             onClick={toggleTheme}
-            className="btn btn-ghost btn-circle transition-transform hover:scale-110"
+            className="btn btn-ghost btn-circle transition-transform hover:scale-110 text-black"
             aria-label="Toggle Theme"
           >
             {theme === "light" ? (

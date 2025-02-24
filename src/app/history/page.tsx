@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const HistoryPage: React.FC = () => {
   return (
-    <main className="flex justify-center items-center min-h-screen bg-base-200 p-4">
+    <main className="flex justify-center items-center min-h-screen bg-base-200 p-4 pt-24">
       <div className="card w-full max-w-2xl bg-base-100 shadow-xl p-6">
         {/* Hero Icon */}
         <div className="flex justify-center mb-4">
@@ -30,12 +30,24 @@ const HistoryPage: React.FC = () => {
             from Clear Lake, Washington.
           </p>
 
+          <img
+            src="/JackLucille.jpg"
+            alt="Jack and Lucille"
+            className="my-6 w-full h-auto object-cover rounded-md"
+          />
+
           <p>
             Jack and Lucille were married in 1947. They built a home where they raised
             their three children. (Miller&#39;s Retreat) Jack raised cattle on the land and
             could always be found working in his large bountiful vegetable garden at the
             top of the hill.
           </p>
+
+          <img
+            src="/hangar.jpg"
+            alt="Hangar"
+            className="my-6 w-full h-auto object-cover rounded-md"
+          />
 
           <p>
             In the 1970s, Jack fulfilled his dream of flying. He created an airstrip in
@@ -44,6 +56,12 @@ const HistoryPage: React.FC = () => {
             over, and they would have big potlucks in the hangar. His experimental propeller
             airplane he was building hangs from the rafters.
           </p>
+
+          <img
+            src="/hangar2.jpg"
+            alt="Hangar 2"
+            className="my-6 w-full h-auto object-cover rounded-md"
+          />
 
           <p>
             Jack worked on the island ferry for over forty years until his retirement, and
@@ -54,6 +72,12 @@ const HistoryPage: React.FC = () => {
             here. And the rest, as they say, is history — that&#39;s how Miller&#39;s Farm Island Weddings
             was born.
           </p>
+
+          <img
+            src="/reef.jpg"
+            alt="Reef"
+            className="my-6 w-full h-auto object-cover rounded-md"
+          />
 
           <p>
             It has been a real pleasure hosting so many wonderful weddings and events here.

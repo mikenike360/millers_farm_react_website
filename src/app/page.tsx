@@ -4,6 +4,7 @@ import Carousel from "@/components/Carousel";
 import { FaSearch, FaCalendarAlt, FaUsers } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Link from "next/link"; // Import Link from next/link
 
 // Define a TypeScript interface for reservations
 interface Reservation {
@@ -19,6 +20,7 @@ export default function Home() {
   const [reservationType, setReservationType] = useState("Wedding");
   const [checkIn, setCheckIn] = useState<Date | null>(null);
   const [checkOut, setCheckOut] = useState<Date | null>(null);
+  
 
   return (
     <div className="flex flex-col">
@@ -49,34 +51,34 @@ export default function Home() {
             {/* Inputs Wrapper */}
             <div className="flex flex-wrap gap-4 w-full justify-center">
               {/* Check-In Date */}
-              <div className="bg-neutral text-black rounded-lg shadow-md p-3 flex items-center gap-2 w-fit">
-                <FaCalendarAlt className="text-white" />
+              <div className="bg-base-300 text-black rounded-lg shadow-md p-3 flex items-center gap-2 w-fit">
+                <FaCalendarAlt className="text-base-content" />
                 <DatePicker
                   selected={checkIn}
                   onChange={(date) => setCheckIn(date)}
-                  className="appearance-none outline-none bg-neutral text-white px-3 py-2 rounded-md border-0 focus:border-primary focus:ring-2 focus:ring-primary w-36"
+                  className="appearance-none outline-none bg-base-300 placeholder-base-content text-base-content px-3 py-2 rounded-md border-0 focus:border-primary focus:ring-2 focus:ring-primary w-36"
                   placeholderText="Check-In"
                 />
               </div>
 
               {/* Check-Out Date */}
-              <div className="bg-neutral text-white rounded-lg shadow-md p-3 flex items-center gap-2 w-fit">
-                <FaCalendarAlt className="text-white" />
+              <div className="bg-base-300 text-base-content rounded-lg shadow-md p-3 flex items-center gap-2 w-fit">
+                <FaCalendarAlt className="text-base-content" />
                 <DatePicker
                   selected={checkOut}
                   onChange={(date) => setCheckOut(date)}
-                  className="appearance-none outline-none bg-neutral text-white px-3 py-2 rounded-md border-0 focus:border-primary focus:ring-2 focus:ring-primary w-36"
+                  className="appearance-none outline-none bg-base-300 placeholder-base-content text-base-content px-3 py-2 rounded-md border-0 focus:border-primary focus:ring-2 focus:ring-primary w-36"
                   placeholderText="Check-Out"
                 />
               </div>
 
               {/* Reservation Type Dropdown */}
-              <div className="bg-neutral rounded-lg shadow-md p-3 flex items-center gap-2 w-fit relative">
+              <div className="bg-base-300 text-base-content rounded-lg shadow-md p-3 flex items-center gap-2 w-fit relative">
                 <FaUsers />
                 <select
                   value={reservationType}
                   onChange={(e) => setReservationType(e.target.value)}
-                  className="appearance-none outline-none bg-neutral px-3 py-2 rounded-md border-0 focus:border-primary focus:ring-2 focus:ring-primary w-48"
+                  className="appearance-none outline-none bg-base-300 px-3 py-2 text-base-content rounded-md border-0 focus:border-primary focus:ring-2 focus:ring-primary w-48"
                 >
                   <option value="Wedding">Wedding</option>
                   <option value="Engagement Party">Engagement Party</option>
@@ -92,19 +94,32 @@ export default function Home() {
                   <option value="Art Exhibition">Art Exhibition</option>
                   <option value="Other">Other</option>
                 </select>
-                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none text-white">
+                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none text-base-content">
                   ▼
                 </span>
               </div>
             </div>
 
             {/* Search Button */}
-            <button className="mx-auto bg-button bg-neutral hover:bg-primary text-white px-6 py-2 rounded-lg flex items-center shadow-md">
-              <FaSearch className="mr-2" /> Book Now!
-            </button>
+              <Link
+                href={{
+                  pathname: "/reserve",
+                  query: {
+                    checkIn: checkIn ? checkIn.toISOString().split("T")[0] : "",
+                    checkOut: checkOut ? checkOut.toISOString().split("T")[0] : "",
+                    eventType: reservationType,
+                  },
+                }}
+              >
+              <button className="mx-auto bg-button bg-base-300 hover:bg-base-200 text-base-content px-6 py-2 rounded-lg flex items-center shadow-md">
+                <FaSearch className="mr-2" /> Book Now!
+              </button>
+            </Link>
+
           </div>
         </div>
       </div>
+
 
       {/* Carousel Section */}
       <section className="bg-base-200 py-10 px-4">
@@ -146,7 +161,9 @@ export default function Home() {
             Schedule a tour, request more information, or reserve your date to
             make your dream wedding a reality.
           </p>
-          <button className="btn btn-secondary">Contact Us</button>
+          <a href="/contact">
+          <button className="btn btn-base-300">Contact Us</button>
+          </a>
         </div>
       </section>
     </div>

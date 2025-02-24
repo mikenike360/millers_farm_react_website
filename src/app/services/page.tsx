@@ -114,7 +114,7 @@ const ServicesPage: React.FC = () => {
             <h2 className="text-3xl font-bold mb-2 text-secondary flex items-center gap-2"><BuildingOffice2Icon className="w-8 h-8" /> Alcohol Policy</h2>
             <p>
               Champagne, beer, and wine are permitted. We require a banquet permit from the Department of Licensing and a licensed bartender. You can purchase a permit{' '}
-              <a href="https://example.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+              <a href="https://lcb.wa.gov/licensing/order-banquet-permits-online" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
                 here
               </a>.
             </p>
@@ -124,7 +124,7 @@ const ServicesPage: React.FC = () => {
             <h2 className="text-3xl font-bold mb-2 text-secondary flex items-center gap-2"><ShieldCheckIcon className="w-8 h-8" /> Insurance</h2>
             <p>
               Event insurance must also be provided and is easily obtained from your homeowners insurance provider or through{' '}
-              <a href="https://example.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+              <a href="https://www.wedsafe.com/Pages/home.aspx" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
                 Wedsafe
               </a>.
             </p>

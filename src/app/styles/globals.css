@@ -20,8 +20,9 @@ body {
 }
 
 .react-datepicker__input-container input::placeholder {
-  color: white !important;
+  color: text-base-content !important;
   opacity: 1 !important;
+
 }
 
 
