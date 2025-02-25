@@ -1,40 +1,83 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Carousel from "@/components/Carousel";
-import { FaSearch, FaCalendarAlt, FaUsers } from "react-icons/fa";
+import { FaSearch, FaCalendarAlt, FaUsers, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Link from "next/link"; // Import Link from next/link
+import Link from "next/link";
 
-// Define a TypeScript interface for reservations
 interface Reservation {
   id: string;
   name: string;
-  start_date: string; // Assuming it's stored as an ISO string
-  end_date: string;   // Assuming it's stored as an ISO string
+  start_date: string;
+  end_date: string;
 }
 
 export default function Home() {
-  // Use strongly typed state instead of `any[]`
   const [reservations] = useState<Reservation[]>([]);
   const [reservationType, setReservationType] = useState("Wedding");
   const [checkIn, setCheckIn] = useState<Date | null>(null);
   const [checkOut, setCheckOut] = useState<Date | null>(null);
-  
+
+  // Array of background images
+  const images = [
+    "hero_bg.jpeg",
+    "og.jpg",
+    "hero_4.jpg",
+    "millers_hill_farm_nighttime.jpg",
+  ];
+
+  // State to track the current image index
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Automatically change images every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  // Handler to go to the previous image
+  const handlePrev = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  };
+
+  // Handler to go to the next image
+  const handleNext = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
 
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
       <div
-        className="h-screen md:h-[700px] relative"
+        className="h-screen md:h-[700px] relative transition-all duration-1000 ease-in-out"
         style={{
-          backgroundImage: "url('hero_bg.jpeg')",
+          backgroundImage: `url('${images[currentImageIndex]}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
         {/* Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+
+        {/* Slider Controls */}
+        <div className="absolute bottom-10 left-0 right-0 flex justify-center items-center z-20 space-x-4">
+          <button
+            onClick={handlePrev}
+            className="bg-white bg-opacity-70 p-3 rounded-full hover:bg-opacity-90 transition"
+          >
+            <FaChevronLeft className="text-black" />
+          </button>
+          <button
+            onClick={handleNext}
+            className="bg-white bg-opacity-70 p-3 rounded-full hover:bg-opacity-90 transition"
+          >
+            <FaChevronRight className="text-black" />
+          </button>
+        </div>
 
         {/* Hero Content */}
         <div className="relative z-10 flex flex-col items-center justify-center text-center text-white px-6 h-full">
@@ -48,9 +91,7 @@ export default function Home() {
 
           {/* Booking Form */}
           <div className="flex flex-col items-center gap-4 w-full max-w-xl mx-auto">
-            {/* Inputs Wrapper */}
             <div className="flex flex-wrap gap-4 w-full justify-center">
-              {/* Check-In Date */}
               <div className="bg-base-300 text-black rounded-lg shadow-md p-3 flex items-center gap-2 w-fit">
                 <FaCalendarAlt className="text-base-content" />
                 <DatePicker
@@ -60,8 +101,6 @@ export default function Home() {
                   placeholderText="Check-In"
                 />
               </div>
-
-              {/* Check-Out Date */}
               <div className="bg-base-300 text-base-content rounded-lg shadow-md p-3 flex items-center gap-2 w-fit">
                 <FaCalendarAlt className="text-base-content" />
                 <DatePicker
@@ -71,8 +110,6 @@ export default function Home() {
                   placeholderText="Check-Out"
                 />
               </div>
-
-              {/* Reservation Type Dropdown */}
               <div className="bg-base-300 text-base-content rounded-lg shadow-md p-3 flex items-center gap-2 w-fit relative">
                 <FaUsers />
                 <select
@@ -99,27 +136,23 @@ export default function Home() {
                 </span>
               </div>
             </div>
-
-            {/* Search Button */}
-              <Link
-                href={{
-                  pathname: "/reserve",
-                  query: {
-                    checkIn: checkIn ? checkIn.toISOString().split("T")[0] : "",
-                    checkOut: checkOut ? checkOut.toISOString().split("T")[0] : "",
-                    eventType: reservationType,
-                  },
-                }}
-              >
+            <Link
+              href={{
+                pathname: "/reserve",
+                query: {
+                  checkIn: checkIn ? checkIn.toISOString().split("T")[0] : "",
+                  checkOut: checkOut ? checkOut.toISOString().split("T")[0] : "",
+                  eventType: reservationType,
+                },
+              }}
+            >
               <button className="mx-auto bg-button bg-base-300 hover:bg-base-200 text-base-content px-6 py-2 rounded-lg flex items-center shadow-md">
                 <FaSearch className="mr-2" /> Book Now!
               </button>
             </Link>
-
           </div>
         </div>
       </div>
-
 
       {/* Carousel Section */}
       <section className="bg-base-200 py-10 px-4">
@@ -162,7 +195,7 @@ export default function Home() {
             make your dream wedding a reality.
           </p>
           <a href="/contact">
-          <button className="btn btn-base-300">Contact Us</button>
+            <button className="btn btn-base-300">Contact Us</button>
           </a>
         </div>
       </section>
