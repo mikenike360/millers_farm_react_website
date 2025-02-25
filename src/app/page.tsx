@@ -154,7 +154,7 @@ export default function Home() {
       </section>
 
       {/* Call to Action */}
-      <section className="bg-primary text-primary-content py-10 text-center">
+      <section className="bg-gradient-to-r from-red-400 to-orange-200 text-gray-900 py-10 text-center">
         <div className="max-w-lg mx-auto">
           <h2 className="text-3xl font-bold mb-4">Ready to Tie the Knot?</h2>
           <p className="mb-6">

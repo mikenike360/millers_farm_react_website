@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import Image from "next/image";
 import {
   CakeIcon,
   FireIcon,
@@ -89,9 +90,11 @@ const VendorsPage: React.FC = () => {
       <main className="flex flex-col items-center min-h-screen bg-base-200 p-4 pt-24">
         <h1 className="text-3xl font-bold text-center mb-6">Recommended Vendors</h1>
         {/* Vendor image below the main title */}
-        <img
+        <Image
           src="/vendor.png"
           alt="Vendor"
+          width={256} // w-64 equals 256px
+          height={256} // Adjust height as needed
           className="mb-6 w-64 h-auto object-contain max-w-2xl"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">

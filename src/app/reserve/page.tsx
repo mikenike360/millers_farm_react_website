@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useState, useMemo } from "react";
+
+import React, { Suspense, useEffect, useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -20,16 +21,17 @@ interface BookingEvent extends Event {
   confirmed: boolean;
 }
 
-export default function ReservationPage() {
+
+function ReservationContent() {
   const searchParams = useSearchParams();
 
-  // Extract and parse start/end dates from the URL
+  // Extract and parse dates from URL
   const urlStartDate = searchParams.get("checkIn");
   const urlEndDate = searchParams.get("checkOut");
   const initialStartDate = urlStartDate ? new Date(urlStartDate) : null;
   const initialEndDate = urlEndDate ? new Date(urlEndDate) : null;
 
-  // Extract eventType from URL and set as initial state
+  // Extract eventType from URL
   const urlEventType = searchParams.get("eventType") || "Not Defined";
   const [eventType, setEventType] = useState<string>(urlEventType);
 
@@ -131,7 +133,7 @@ export default function ReservationPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-base-100 shadow-lg rounded-lg mt-14">
+    <div className="max-w-4xl mx-auto p-6 bg-base-100 shadow-lg rounded-lg pt-24">
       {alertMessage && (
         <AlertModal message={alertMessage} onClose={() => setAlertMessage(null)} />
       )}
@@ -169,7 +171,6 @@ export default function ReservationPage() {
               />
             </div>
 
-            {/* Event Type Dropdown */}
             <div className="bg-neutral text-white rounded-lg shadow-md p-4 flex flex-col">
               <label className="block font-semibold mb-2">Event Type</label>
               <select
@@ -201,7 +202,6 @@ export default function ReservationPage() {
             The calendar below shows all our existing reservations.
           </p>
 
-          {/* Calendar */}
           <div className="bg-blue-400 text-black p-4 mt-6 rounded-lg shadow-md">
             <h3 className="text-lg font-bold text-center mb-3">
               Existing Reservations
@@ -222,7 +222,6 @@ export default function ReservationPage() {
         </>
       )}
 
-      {/* Modal for Step 2: User Details with Back Button */}
       <Modal isOpen={step === 2} onClose={() => setStep(1)}>
         <h3 className="text-xl font-semibold text-center mb-4">
           Enter Your Information
@@ -264,7 +263,6 @@ export default function ReservationPage() {
         </div>
       </Modal>
 
-      {/* Modal for Step 3: Confirmation */}
       <Modal isOpen={step === 3} onClose={() => setStep(2)}>
         <h3 className="text-xl font-semibold text-center mb-4">
           Confirm Your Reservation
@@ -302,5 +300,13 @@ export default function ReservationPage() {
         </div>
       </Modal>
     </div>
+  );
+}
+
+export default function ReservationPage() {
+  return (
+    <Suspense fallback={<div>Loading reservation page...</div>}>
+      <ReservationContent />
+    </Suspense>
   );
 }
