@@ -1,17 +1,13 @@
 "use client";
 
-import React, { Suspense, useEffect, useState, useMemo } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
-  Calendar,
-  dateFnsLocalizer,
   Event,
-  View,
 } from "react-big-calendar";
-import { format, parse, startOfWeek, getDay } from "date-fns";
-import { enUS } from "date-fns/locale/en-US";
+
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { supabase } from "@/components/supabaseClient";
 import AlertModal from "@/components/AlertModal";
@@ -43,19 +39,6 @@ function ReservationContent() {
   const [phone, setPhone] = useState("");
   const [notes, setNotes] = useState("");
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
-  const [currentDate, setCurrentDate] = useState(new Date());
-
-  const localizer = useMemo(
-    () =>
-      dateFnsLocalizer({
-        format,
-        parse,
-        startOfWeek,
-        getDay,
-        locales: { "en-US": enUS },
-      }),
-    []
-  );
 
   useEffect(() => {
     const fetchBookings = async () => {
