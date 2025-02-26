@@ -6,7 +6,7 @@ const LocationPage: React.FC = () => {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Miller&rsquo;s Farm Island Weddings",
+    "name": "Miller’s Farm Island Weddings",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "2206 Tuttle Lane",
@@ -27,10 +27,10 @@ const LocationPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Our Location - Miller&rsquo;s Farm Island Weddings</title>
+        <title>Our Location - Miller’s Farm Island Weddings</title>
         <meta
           name="description"
-          content="Visit Miller&rsquo;s Farm Island Weddings on Lummi Island, WA. Find our address, directions, and contact information for your next wedding or event."
+          content="Visit Miller’s Farm Island Weddings on Lummi Island, WA. Find our address, directions, and contact information for your next wedding or event."
         />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://millersfarmislandweddings.com/location" />
@@ -44,46 +44,51 @@ const LocationPage: React.FC = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <main style={{ maxWidth: '800px', margin: '0 auto', padding: '8rem' }}>
-        <h1>Our Location</h1>
-        <p>
-          Welcome to Miller&rsquo;s Farm Island Weddings! Our beautiful venue is located on Lummi Island, Washington.
-          Below you&rsquo;ll find our address, directions, and a map to help you plan your visit.
-        </p>
+      <main className="flex justify-center items-center min-h-screen bg-base-200 p-4 pt-24">
+        <div className="w-full max-w-4xl space-y-8">
+          {/* Header Card */}
+          <div className="card bg-gradient-to-r from-red-400 to-orange-200 shadow-xl p-6">
+            <h1 className="text-4xl font-bold text-center text-gray-900 font-mono">Our Location</h1>
+            <br></br>
+            <p className="text-lg text-center text-gray-900 font-mono">
+              Welcome to Miller’s Farm Island Weddings! Our beautiful venue is located on Lummi Island, Washington.
+              Below you’ll find our address, directions, and a map to help you plan your visit.
+            </p>
+          </div>
 
-        <section>
-          <h2>Address</h2>
-          <address>
-            2206 Tuttle Lane<br />
-            Lummi Island, WA 98248<br />
-            USA
-          </address>
-        </section>
+          {/* Address Card */}
+          <div className="card bg-gradient-to-r from-red-400 to-orange-200 shadow-xl p-8">
+            <h2 className="text-3xl font-bold text-center text-gray-900 font-mono">Address</h2>
+            <address className="text-center text-2xl text-gray-900 font-mono">
+              <br></br>
+              2206 Tuttle Lane<br />
+              Lummi Island, WA 98248<br />
+              USA
+            </address>
+          </div>
 
-        <section>
-          <h2>Directions</h2>
-          <p>
-            We are easily accessible via local roads. Please refer to the map below for detailed directions.
-          </p>
-          {/* Google Maps Embed */}
-          <iframe
-            src="https://www.google.com/maps?q=2206+Tuttle+Lane,+Lummi+Island,+WA+98248&output=embed"
-            width="100%"
-            height="450"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Miller's Farm Location Map"
-          ></iframe>
-        </section>
+          {/* Directions Card */}
+          <div className="card bg-gradient-to-r from-red-400 to-orange-200 shadow-xl p-8">
+            <h2 className="text-3xl font-bold text-center text-gray-900 font-mono">Directions</h2>
+            <br></br>
+            <p className="text-center text-gray-900 font-mono">
+              We are easily accessible via local roads. Please refer to the map below for detailed directions.
+            </p>
+            <div className="mt-4">
+              <iframe
+                src="https://www.google.com/maps?q=2206+Tuttle+Lane,+Lummi+Island,+WA+98248&output=embed"
+                className="w-full h-64 md:h-96 rounded-md shadow-lg"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Miller's Farm Location Map"
+              ></iframe>
+            </div>
+          </div>
 
-        <section>
-          <h2>Contact Us</h2>
-          <p>
-            If you have any questions or need further assistance, please call us at <a href="tel:+11234567890">+1-123-456-7890</a>.
-          </p>
-        </section>
+
+        </div>
       </main>
     </>
   );

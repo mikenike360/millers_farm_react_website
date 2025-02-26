@@ -21,7 +21,6 @@ interface BookingEvent extends Event {
   confirmed: boolean;
 }
 
-
 function ReservationContent() {
   const searchParams = useSearchParams();
 
@@ -133,24 +132,24 @@ function ReservationContent() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-base-100 shadow-lg rounded-lg pt-24">
+    <div className="max-w-4xl mx-auto p-8 bg-gradient-to-r from-red-400 to-orange-200 shadow-xl rounded-lg mt-12">
       {alertMessage && (
         <AlertModal message={alertMessage} onClose={() => setAlertMessage(null)} />
       )}
-      <h2 className="text-2xl font-bold text-center mb-4">
+      <h2 className="text-2xl font-bold text-center mb-4 text-gray-900 font-mono">
         Full-Day / Weekend Reservation
       </h2>
 
       {/* Step 1: Select Date */}
       {step === 1 && (
         <>
-          <p className="text-center mb-4">
-            Enter the dates for your reservation. The calendar below shows existing reservations.
+          <p className="text-center mb-4 text-gray-900 font-mono">
+            Enter the dates for your reservation.
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center">
-            <div className="bg-neutral text-white rounded-lg shadow-md p-4 flex flex-col">
-              <label className="block font-semibold mb-2">Start Date</label>
+            <div className="bg-white rounded-lg shadow-md p-4 flex flex-col">
+              <label className="block font-semibold mb-2 text-gray-900 font-mono">Start Date</label>
               <DatePicker
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
@@ -160,8 +159,8 @@ function ReservationContent() {
               />
             </div>
 
-            <div className="bg-neutral text-white rounded-lg shadow-md p-4 flex flex-col">
-              <label className="block font-semibold mb-2">End Date</label>
+            <div className="bg-white rounded-lg shadow-md p-4 flex flex-col">
+              <label className="block font-semibold mb-2 text-gray-900 font-mono">End Date</label>
               <DatePicker
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
@@ -171,8 +170,8 @@ function ReservationContent() {
               />
             </div>
 
-            <div className="bg-neutral text-white rounded-lg shadow-md p-4 flex flex-col">
-              <label className="block font-semibold mb-2">Event Type</label>
+            <div className="bg-white rounded-lg shadow-md p-4 flex flex-col">
+              <label className="block font-semibold mb-2 text-gray-900 font-mono">Event Type</label>
               <select
                 className="select select-bordered bg-white text-black px-3 py-2 rounded-md border-0 focus:border-primary focus:ring-2 focus:ring-primary w-44"
                 value={eventType}
@@ -195,35 +194,17 @@ function ReservationContent() {
             </div>
           </div>
 
-          <button className="btn btn-primary mt-4 w-full" onClick={goToStep2}>
+          <button
+            className="btn bg-gray-900 text-white mt-4 hover:bg-gray-700 transition duration-300"
+            onClick={goToStep2}
+          >
             Next: Your Info →
           </button>
-          <p className="text-black text-center">
-            The calendar below shows all our existing reservations.
-          </p>
-
-          <div className="bg-blue-400 text-black p-4 mt-6 rounded-lg shadow-md">
-            <h3 className="text-lg font-bold text-center mb-3">
-              Existing Reservations
-            </h3>
-            <Calendar
-              localizer={localizer}
-              events={bookings}
-              startAccessor="start"
-              endAccessor="end"
-              defaultView="month"
-              views={["month"] as View[]}
-              date={currentDate}
-              onNavigate={(newDate) => setCurrentDate(newDate)}
-              style={{ height: 600 }}
-              popup
-            />
-          </div>
         </>
       )}
 
       <Modal isOpen={step === 2} onClose={() => setStep(1)}>
-        <h3 className="text-xl font-semibold text-center mb-4">
+        <h3 className="text-xl font-semibold text-center mb-4 text-gray-900 font-mono">
           Enter Your Information
         </h3>
         <input
@@ -254,23 +235,28 @@ function ReservationContent() {
           onChange={(e) => setNotes(e.target.value)}
         />
         <div className="flex gap-4">
-          <button className="btn btn-secondary w-full" onClick={() => setStep(1)}>
+          <button
+            className="btn bg-gray-900 text-white w-full hover:bg-gray-700 transition duration-300"
+            onClick={() => setStep(1)}
+          >
             Back
           </button>
-          <button className="btn btn-primary w-full" onClick={goToStep3}>
+          <button
+            className="btn bg-gray-900 text-white w-full hover:bg-gray-700 transition duration-300"
+            onClick={goToStep3}
+          >
             Next: Confirm →
           </button>
         </div>
       </Modal>
 
       <Modal isOpen={step === 3} onClose={() => setStep(2)}>
-        <h3 className="text-xl font-semibold text-center mb-4">
+        <h3 className="text-xl font-semibold text-center mb-4 text-gray-900 font-mono">
           Confirm Your Reservation
         </h3>
-        <div className="mb-4">
+        <div className="mb-4 text-gray-900 font-mono">
           <p>
-            <strong>Reservation Dates:</strong>{" "}
-            {startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}
+            <strong>Reservation Dates:</strong> {startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}
           </p>
           <p>
             <strong>Event Type:</strong> {eventType}
@@ -291,10 +277,16 @@ function ReservationContent() {
           )}
         </div>
         <div className="flex gap-4">
-          <button className="btn btn-secondary w-full" onClick={() => setStep(2)}>
+          <button
+            className="btn bg-gray-900 text-white w-full hover:bg-gray-700 transition duration-300"
+            onClick={() => setStep(2)}
+          >
             Back
           </button>
-          <button className="btn btn-success w-full" onClick={confirmReservations}>
+          <button
+            className="btn bg-green-600 text-white w-full hover:bg-green-500 transition duration-300"
+            onClick={confirmReservations}
+          >
             Confirm &amp; Submit
           </button>
         </div>

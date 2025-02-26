@@ -66,24 +66,27 @@ const ServicesPage: React.FC = () => {
 
       <main className="container mx-auto px-8 py-16 mt-16">
 
-        {/* Header Section */}
-        <section className="mb-12 text-center">
-          <h1 className="text-5xl font-bold mb-4 text-primary">Services Offered</h1>
-          <p className="text-lg max-w-3xl mx-auto">
-            We can accommodate up to 200 guests for your next wedding or event. Our venue features wide-open spaces perfect for food trucks, dance floors, lawn games, and dining.
-          </p>
+        {/* Header Section as a Card */}
+        <section className="mb-12 text-center max-w-2xl mx-auto">
+          <div className="card bg-gradient-to-r from-red-400 to-orange-200 shadow-xl p-6">
+            <h1 className="text-4xl font-bold mb-4 text-gray-900 font-mono">Services Offered</h1>
+            <p className="text-2xl max-w-3xl mx-auto text-gray-900 font-mono">
+              We can accommodate up to 200 guests for your next wedding or event. Our venue features wide-open spaces perfect for food trucks, dance floors, lawn games, and dining.
+            </p>
+          </div>
         </section>
+
 
         {/* Dynamic Service Cards */}
         <section className="mb-12 text-center">
-          <h2 className="text-3xl font-bold mb-6 text-secondary">What We Provide:</h2>
+        
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {servicesData.map((service, index) => (
-              <div key={index} className="card bg-base-100 shadow-xl p-6 flex flex-row items-start space-x-4 hover:shadow-2xl transition duration-300">
+              <div key={index} className="card bg-gradient-to-r from-red-400 to-orange-200 shadow-xl p-6 flex flex-row items-start space-x-4 hover:shadow-2xl transition duration-300">
                 {service.icon}
                 <div>
-                  <h3 className="text-xl font-semibold">{service.title}</h3>
-                  <p className="text-gray-500">{service.description}</p>
+                  <h3 className="text-xl text-gray-900 font-semibold">{service.title}</h3>
+                  <p className="text-gray-900">{service.description}</p>
                 </div>
               </div>
             ))}
@@ -91,7 +94,7 @@ const ServicesPage: React.FC = () => {
         </section>
 
         {/* Weddings Section */}
-        <section className="mb-12 relative bg-gradient-to-r from-primary to-secondary p-10 rounded-xl shadow-lg text-white max-w-2xl mx-auto">
+        <section className="mb-12 relative bg-gradient-to-r from-red-400 to-orange-200 p-10 rounded-xl shadow-lg text-gray-900 max-w-2xl mx-auto">
           <h2 className="text-3xl font-bold mb-2 text-center">Weddings</h2>
           <p>
             A deposit is required to hold your wedding date and the final payment is due 30 days prior to your wedding. This includes Friday set-up with a two-hour rehearsal, all day Saturday, and cleanup by noon on Sunday.
@@ -110,21 +113,21 @@ const ServicesPage: React.FC = () => {
 
         {/* Policies Section */}
         <section className="mb-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="card bg-base-100 shadow-lg p-6 hover:shadow-xl transition duration-300">
-            <h2 className="text-3xl font-bold mb-2 text-secondary flex items-center gap-2"><BuildingOffice2Icon className="w-8 h-8" /> Alcohol Policy</h2>
-            <p>
+          <div className="card bg-gradient-to-r from-red-400 to-orange-200 shadow-lg p-6 hover:shadow-xl transition duration-300">
+            <h2 className="text-3xl font-bold mb-2 text-gray-900 flex items-center gap-2"><BuildingOffice2Icon className="w-8 h-8" /> Alcohol Policy</h2>
+            <p className='text-gray-900'>
               Champagne, beer, and wine are permitted. We require a banquet permit from the Department of Licensing and a licensed bartender. You can purchase a permit{' '}
-              <a href="https://lcb.wa.gov/licensing/order-banquet-permits-online" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+              <a href="https://lcb.wa.gov/licensing/order-banquet-permits-online" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:underline">
                 here
               </a>.
             </p>
           </div>
 
-          <div className="card bg-base-100 shadow-lg p-6 hover:shadow-xl transition duration-300">
-            <h2 className="text-3xl font-bold mb-2 text-secondary flex items-center gap-2"><ShieldCheckIcon className="w-8 h-8" /> Insurance</h2>
-            <p>
+          <div className="card bg-gradient-to-r from-red-400 to-orange-200 shadow-lg p-6 hover:shadow-xl transition duration-300">
+            <h2 className="text-3xl font-bold mb-2 text-gray-900 flex items-center gap-2"><ShieldCheckIcon className="w-8 h-8" /> Insurance</h2>
+            <p className='text-gray-900'>
               Event insurance must also be provided and is easily obtained from your homeowners insurance provider or through{' '}
-              <a href="https://www.wedsafe.com/Pages/home.aspx" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+              <a href="https://www.wedsafe.com/Pages/home.aspx" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:underline">
                 Wedsafe
               </a>.
             </p>
@@ -132,7 +135,7 @@ const ServicesPage: React.FC = () => {
         </section>
 
         {/* Call to Action */}
-        <section className="text-center py-8 px-6 bg-gradient-to-r from-secondary to-primary rounded-xl text-white max-w-lg mx-auto">
+        <section className="text-center py-8 px-6 bg-gradient-to-r from-red-400 to-orange-200 rounded-xl text-gray-900 max-w-lg mx-auto">
           <p className="text-lg">Let us know if you have any other questions or would like to schedule a tour!</p>
           <a href="/contact">
             <button className="mt-4 px-6 py-3 bg-white text-primary font-bold rounded-lg shadow-lg hover:bg-gray-200 transition duration-300">

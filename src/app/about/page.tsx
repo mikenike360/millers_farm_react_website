@@ -7,7 +7,7 @@ export default function About() {
       <div className="w-full max-w-4xl space-y-8">
         {/* Header Card */}
         <div className="card bg-gradient-to-r from-red-400 to-orange-200 shadow-xl p-6">
-          <h1 className="text-5xl font-extrabold text-center mb-4 text-gray-900">
+          <h1 className="text-4xl font-extrabold text-center mb-4 text-gray-900">
             About Miller’s Hill Farm
           </h1>
         </div>

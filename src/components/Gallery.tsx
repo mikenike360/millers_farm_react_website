@@ -34,30 +34,38 @@ export default function MyLightboxGallery({ images = [] }: MyLightboxGalleryProp
 
   if (!images.length) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white via-brandGray to-gray-200">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-red-400 to-orange-200">
         <p className="text-red-600 text-2xl">No images available</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-brandGray to-gray-200 py-10">
+    <div className="min-h-screen bg-base-300 py-10">
       <div className="mx-auto max-w-screen-lg px-4">
+
         {/* Heading Section */}
-        <h2 className="text-4xl font-extrabold text-gray-800 text-center mb-2 mt-12">
-          Our Beautiful Gallery
-        </h2>
-        <p className="text-center text-gray-600 mb-8">
-          Explore our recent photos. Click any image to view it in full glory!
-        </p>
+        <div className="card bg-gradient-to-r from-red-400 to-orange-200 shadow-xl max-w-2xl p-6 mx-auto">
+          <h2 className="text-4xl font-extrabold text-gray-800 text-center mb-2 mt-12">
+            Our Beautiful Gallery
+          </h2>
+          <p className="text-center text-gray-600 mb-8">
+            Explore our recent photos. Click any image to view it in full glory!
+          </p>
+        </div>
+
+
+        <br></br>
+        <br></br>
+
 
         {/* Responsive Grid Layout */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
           {images.map(({ thumbnail }, index) => (
             <div
               key={index}
-              className="relative overflow-hidden rounded-xl bg-white shadow-md 
-                         hover:shadow-xl transition-shadow cursor-pointer 
+              className="relative overflow-hidden rounded-xl 
+                         hover:shadow-xl cursor-pointer 
                          flex items-center justify-center group 
                          animate-fadeInUp"
               onClick={() => setOpenIndex(index)}
@@ -97,6 +105,13 @@ export default function MyLightboxGallery({ images = [] }: MyLightboxGalleryProp
         slides={slides}
         index={openIndex ?? 0}
       />
+
+      
+
     </div>
+
+    
+
+
   );
 }

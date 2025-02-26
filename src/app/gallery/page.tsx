@@ -24,12 +24,12 @@ async function getImages(): Promise<{ thumbnail: string; full: string }[]> {
     .map((file) => {
       if (!file.name) return null;
 
-      //  Generate full-size URL
+      // Generate full-size URL
       const { data: fullUrlData } = supabase.storage
         .from("millers_farm_images")
         .getPublicUrl(file.name);
 
-      //  Supabase image transformation: resize dynamically (200x150)
+      // Supabase image transformation: resize dynamically (200x150)
       const thumbnailUrl = `${fullUrlData.publicUrl}?width=200&height=150&resize=cover`;
 
       return {
@@ -43,14 +43,15 @@ async function getImages(): Promise<{ thumbnail: string; full: string }[]> {
   return images;
 }
 
-
-
 export default async function GalleryPage() {
   const images = await getImages();
 
   return (
-    <div>
-      <MyLightboxGallery images={images} />
-    </div>
+    <main className="flex justify-center items-start min-h-screen bg-base-200 p-4 pt-24">
+      <div className="card bg-gradient-to-r from-red-400 to-orange-200 shadow-xl p-8 w-full max-w-6xl">
+        <MyLightboxGallery images={images} />
+      </div>
+    </main>
+
   );
 }
