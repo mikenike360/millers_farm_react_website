@@ -14,7 +14,7 @@ export default function Navbar() {
 
   return (
 <div className="navbar fixed top-0 left-0 w-full z-50 shadow-lg 
-                bg-gradient-to-r from-red-400 to-orange-200 text-primary-content 
+                bg-gradient-to-r from-teal-600 to-blue-400 text-primary-content 
                 backdrop-blur-md bg-opacity-80 transition-colors duration-300 py-0">
 
 

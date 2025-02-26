@@ -46,10 +46,10 @@ export default function MyLightboxGallery({ images = [] }: MyLightboxGalleryProp
 
         {/* Heading Section */}
         <div className="card bg-gradient-to-r from-red-400 to-orange-200 shadow-xl max-w-2xl p-6 mx-auto">
-          <h2 className="text-4xl font-extrabold text-gray-800 text-center mb-2 mt-12">
-            Our Beautiful Gallery
+          <h2 className="text-4xl font-extrabold text-gray-800 text-center mb-2 ">
+            Photo Gallery
           </h2>
-          <p className="text-center text-gray-600 mb-8">
+          <p className="text-center text-gray-900 ">
             Explore our recent photos. Click any image to view it in full glory!
           </p>
         </div>

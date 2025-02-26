@@ -69,8 +69,8 @@ const ServicesPage: React.FC = () => {
         {/* Header Section as a Card */}
         <section className="mb-12 text-center max-w-2xl mx-auto">
           <div className="card bg-gradient-to-r from-red-400 to-orange-200 shadow-xl p-6">
-            <h1 className="text-4xl font-bold mb-4 text-gray-900 font-mono">Services Offered</h1>
-            <p className="text-2xl max-w-3xl mx-auto text-gray-900 font-mono">
+            <h1 className="text-3xl font-bold mb-4 text-gray-900 font-mono">Services Offered</h1>
+            <p className="text-1xl max-w-3xl mx-auto text-gray-900 font-mono">
               We can accommodate up to 200 guests for your next wedding or event. Our venue features wide-open spaces perfect for food trucks, dance floors, lawn games, and dining.
             </p>
           </div>
