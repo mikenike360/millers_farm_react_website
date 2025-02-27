@@ -8,7 +8,7 @@ export default function Home() {
         {/* Wrapper with responsive scale transformation */}
         <div className="w-full h-full transform scale-90 sm:scale-100">
           <Spline
-            scene="https://prod.spline.design/nIL9OqiGfAZBiABf/scene.splinecode"
+            scene="https://prod.spline.design/D1xXDdIRayLnvElx/scene.splinecode"
             style={{ width: "100%", height: "100%" }}
           />
         </div>
