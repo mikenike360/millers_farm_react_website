@@ -6,18 +6,18 @@ export default function Home() {
       {/* Spline Scene as Background */}
       <div className="absolute inset-0 overflow-hidden">
         <Spline
-          scene="https://prod.spline.design/D1xXDdIRayLnvElx/scene.splinecode"
+          scene="https://prod.spline.design/uur7z4MGxu5X29mD/scene.splinecode"
           style={{ width: "100%", height: "100%" }}
         />
       </div>
 
       {/* Overlay Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pt-12">
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
         <div className="max-w-lg">
-          <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-lg">
+          <h1 className="text-3xl md:text-5xl font-bold text-gray-900 drop-shadow-lg">
             Welcome to Miller&apos;s Hill Farm!
           </h1>
-          <p className="mt-4 text-base md:text-xl text-white drop-shadow-lg">
+          <p className="mt-4 text-base md:text-xl text-gary-900 drop-shadow-lg">
             Experience the rustic charm and natural beauty of our venue.
           </p>
           <a
