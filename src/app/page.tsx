@@ -6,7 +6,7 @@ export default function Home() {
       {/* Spline Scene as Background */}
       <div className="absolute inset-0 overflow-hidden">
         <Spline
-          scene="https://prod.spline.design/D1xXDdIRayLnvElx/scene.splinecode"
+          scene="https://prod.spline.design/XnZ0TYOFbPOi33DY/scene.splinecode"
           style={{ width: "100%", height: "100%" }}
         />
       </div>
