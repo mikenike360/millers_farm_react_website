@@ -10,7 +10,7 @@ export default function AlertModal({ message, onClose }: AlertModalProps) {
   return (
     <>
       {/* The modal backdrop */}
-      <div className="modal modal-open">
+      <div className="modal modal-open" style={{ zIndex: 10000 }}>
         <div className="modal-box">
           <h3 className="font-bold text-lg">Alert</h3>
           <p className="py-4">{message}</p>

@@ -1,9 +1,24 @@
-# *
 User-agent: *
 Allow: /
 
-# Host
-Host: http://localhost:3000
+# Sitemap
+Sitemap: https://millersfarmislandweddings.com/sitemap.xml
 
-# Sitemaps
-Sitemap: http://localhost:3000/sitemap.xml
+# Disallow admin and test pages
+Disallow: /admin/
+Disallow: /test/
+Disallow: /test2/
+Disallow: /api/
+
+# Allow important pages
+Allow: /services
+Allow: /reserve
+Allow: /about
+Allow: /gallery
+Allow: /vendors
+Allow: /history
+Allow: /contact
+Allow: /location
+
+# Crawl delay for better server performance
+Crawl-delay: 1

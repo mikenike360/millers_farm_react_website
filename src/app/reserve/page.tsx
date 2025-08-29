@@ -7,6 +7,15 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Event } from "react-big-calendar";
 import { supabase } from "@/components/supabaseClient";
 import AlertModal from "@/components/AlertModal";
+import { 
+  CalendarIcon, 
+  UserIcon, 
+  CheckCircleIcon,
+  ArrowRightIcon,
+  ArrowLeftIcon
+} from "@heroicons/react/24/outline";
+import Button from "@/components/Button";
+import Card from "@/components/Card";
 
 interface BookingEvent extends Event {
   confirmed: boolean;
@@ -109,184 +118,313 @@ function ReservationContent() {
     setAlertMessage("Your reservation has been submitted. We will confirm shortly.");
   };
 
+  const steps = [
+    { number: 1, title: "Select Dates", icon: CalendarIcon },
+    { number: 2, title: "Your Information", icon: UserIcon },
+    { number: 3, title: "Confirm", icon: CheckCircleIcon }
+  ];
+
   return (
-    // Outer container with extra top padding
-    <div className="pt-32">
-      <div className="max-w-4xl mx-auto p-8 bg-gradient-to-r from-red-400 to-orange-200 shadow-xl rounded-lg mt-12 mb-16">
-        {alertMessage && (
-          <AlertModal message={alertMessage} onClose={() => setAlertMessage(null)} />
-        )}
-        <h2 className="text-2xl font-bold text-center mb-4 text-gray-900 font-mono">
-          Full-Day / Weekend Reservation
-        </h2>
+    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-white pt-20">
+      {/* Hero Section */}
+      <section className="relative py-16 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-secondary-600/10"></div>
+        <div className="relative z-10 max-w-7xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 font-display">
+            Reserve Your <span className="gradient-text">Date</span>
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Secure your perfect date at Miller&apos;s Hill Farm for your special event
+          </p>
+        </div>
+      </section>
 
-        {/* Step 1: Date Selection */}
-        {step === 1 && (
-          <>
-            <p className="text-center mb-4 text-gray-900 font-mono">
-              Enter the dates for your reservation.
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <div className="bg-white rounded-lg shadow-md p-4 flex flex-col">
-                <label className="block font-semibold mb-2 text-gray-900 font-mono">
-                  Start Date
-                </label>
-                <DatePicker
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                  className="input input-bordered bg-white text-black px-3 py-2 rounded-md border-0 focus:border-primary focus:ring-2 focus:ring-primary w-44"
-                  placeholderText="Select a start date"
-                  dateFormat="MMMM d, yyyy"
-                />
+      {/* Progress Steps */}
+      <section className="py-8 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex justify-center mb-8">
+            <div className="flex items-center space-x-4">
+              {steps.map((stepItem, index) => (
+                <div key={stepItem.number} className="flex items-center">
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+                    step >= stepItem.number 
+                      ? 'bg-primary-600 border-primary-600 text-white' 
+                      : 'bg-white border-gray-300 text-gray-400'
+                  }`}>
+                    {step > stepItem.number ? (
+                      <CheckCircleIcon className="w-6 h-6" />
+                    ) : (
+                      <stepItem.icon className="w-6 h-6" />
+                    )}
+                  </div>
+                  {index < steps.length - 1 && (
+                    <div className={`w-16 h-1 transition-all duration-300 ${
+                      step > stepItem.number ? 'bg-primary-600' : 'bg-gray-300'
+                    }`}></div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-gray-900">
+              Step {step}: {steps[step - 1].title}
+            </h2>
+          </div>
+        </div>
+      </section>
+
+      {/* Reservation Form */}
+      <section className="py-8 px-4">
+        <div className="max-w-4xl mx-auto">
+          <Card variant="elevated" size="xl" className="p-8" overflow="visible" hover={false}>
+            {alertMessage && (
+              <AlertModal message={alertMessage} onClose={() => setAlertMessage(null)} />
+            )}
+
+            {/* Step 1: Date Selection */}
+            {step === 1 && (
+              <div className="space-y-8">
+                <div className="text-center">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    Select Your Event Dates
+                  </h3>
+                  <p className="text-gray-600">
+                    Choose the perfect dates for your special event
+                  </p>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="space-y-3">
+                    <label className="block font-semibold text-gray-900">
+                      Start Date
+                    </label>
+                    <DatePicker
+                      selected={startDate}
+                      onChange={(date) => setStartDate(date)}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
+                      placeholderText="Select start date"
+                      dateFormat="MMMM d, yyyy"
+                      popperClassName="z-50"
+                      popperPlacement="bottom-start"
+                    />
+                  </div>
+
+                  <div className="space-y-3">
+                    <label className="block font-semibold text-gray-900">
+                      End Date
+                    </label>
+                    <DatePicker
+                      selected={endDate}
+                      onChange={(date) => setEndDate(date)}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
+                      placeholderText="Select end date"
+                      dateFormat="MMMM d, yyyy"
+                      popperClassName="z-50"
+                      popperPlacement="bottom-start"
+                    />
+                  </div>
+
+                  <div className="space-y-3">
+                    <label className="block font-semibold text-gray-900">
+                      Event Type
+                    </label>
+                    <select
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
+                      value={eventType}
+                      onChange={(e) => setEventType(e.target.value)}
+                    >
+                      <option value="Wedding">Wedding</option>
+                      <option value="Engagement Party">Engagement Party</option>
+                      <option value="Birthday Party">Birthday Party</option>
+                      <option value="Anniversary Celebration">Anniversary Celebration</option>
+                      <option value="Baby Shower">Baby Shower</option>
+                      <option value="Family Reunion">Family Reunion</option>
+                      <option value="Graduation Party">Graduation Party</option>
+                      <option value="Live Music Event">Live Music Event</option>
+                      <option value="Fundraiser">Fundraiser</option>
+                      <option value="Private Dinner">Private Dinner</option>
+                      <option value="Food Tasting">Food Tasting</option>
+                      <option value="Art Exhibition">Art Exhibition</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div className="text-center">
+                  <Button
+                    onClick={goToStep2}
+                    variant="gradient"
+                    size="lg"
+                    icon={ArrowRightIcon}
+                    iconPosition="right"
+                  >
+                    Next: Your Information
+                  </Button>
+                </div>
               </div>
+            )}
 
-              <div className="bg-white rounded-lg shadow-md p-4 flex flex-col">
-                <label className="block font-semibold mb-2 text-gray-900 font-mono">
-                  End Date
-                </label>
-                <DatePicker
-                  selected={endDate}
-                  onChange={(date) => setEndDate(date)}
-                  className="input input-bordered bg-white text-black px-3 py-2 rounded-md border-0 focus:border-primary focus:ring-2 focus:ring-primary w-44"
-                  placeholderText="Select an end date"
-                  dateFormat="MMMM d, yyyy"
-                />
+            {/* Step 2: User Information */}
+            {step === 2 && (
+              <div className="space-y-8">
+                <div className="text-center">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    Your Information
+                  </h3>
+                  <p className="text-gray-600">
+                    Please provide your contact details
+                  </p>
+                </div>
+                
+                <div className="space-y-6">
+                  <div>
+                    <label className="block font-semibold text-gray-900 mb-2">
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
+                      placeholder="Enter your full name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block font-semibold text-gray-900 mb-2">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
+                      placeholder="Enter your email address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block font-semibold text-gray-900 mb-2">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
+                      placeholder="Enter your phone number"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block font-semibold text-gray-900 mb-2">
+                      Additional Notes
+                    </label>
+                    <textarea
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300 resize-none"
+                      rows={4}
+                      placeholder="Any special requests or additional information..."
+                      value={notes}
+                      onChange={(e) => setNotes(e.target.value)}
+                    ></textarea>
+                  </div>
+                </div>
+                
+                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                  <Button
+                    onClick={() => setStep(1)}
+                    variant="outline"
+                    size="lg"
+                    icon={ArrowLeftIcon}
+                    iconPosition="left"
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    onClick={goToStep3}
+                    variant="gradient"
+                    size="lg"
+                    icon={ArrowRightIcon}
+                    iconPosition="right"
+                  >
+                    Next: Confirm
+                  </Button>
+                </div>
               </div>
+            )}
 
-              <div className="bg-white rounded-lg shadow-md p-4 flex flex-col">
-                <label className="block font-semibold mb-2 text-gray-900 font-mono">
-                  Event Type
-                </label>
-                <select
-                  className="select select-bordered bg-white text-black px-3 py-2 rounded-md border-0 focus:border-primary focus:ring-2 focus:ring-primary w-44"
-                  value={eventType}
-                  onChange={(e) => setEventType(e.target.value)}
-                >
-                  <option value="Wedding">Wedding</option>
-                  <option value="Engagement Party">Engagement Party</option>
-                  <option value="Birthday Party">Birthday Party</option>
-                  <option value="Anniversary Celebration">Anniversary Celebration</option>
-                  <option value="Baby Shower">Baby Shower</option>
-                  <option value="Family Reunion">Family Reunion</option>
-                  <option value="Graduation Party">Graduation Party</option>
-                  <option value="Live Music Event">Live Music Event</option>
-                  <option value="Fundraiser">Fundraiser</option>
-                  <option value="Private Dinner">Private Dinner</option>
-                  <option value="Food Tasting">Food Tasting</option>
-                  <option value="Art Exhibition">Art Exhibition</option>
-                  <option value="Other">Other</option>
-                </select>
+            {/* Step 3: Confirmation */}
+            {step === 3 && (
+              <div className="space-y-8">
+                <div className="text-center">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    Confirm Your Reservation
+                  </h3>
+                  <p className="text-gray-600">
+                    Please review your details before submitting
+                  </p>
+                </div>
+                
+                <div className="bg-gray-50 rounded-2xl p-6 space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <span className="font-semibold text-gray-900">Reservation Dates:</span>
+                      <p className="text-gray-600">{startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-gray-900">Event Type:</span>
+                      <p className="text-gray-600">{eventType}</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-gray-900">Name:</span>
+                      <p className="text-gray-600">{name}</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-gray-900">Email:</span>
+                      <p className="text-gray-600">{email}</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-gray-900">Phone:</span>
+                      <p className="text-gray-600">{phone}</p>
+                    </div>
+                    {notes && (
+                      <div className="md:col-span-2">
+                        <span className="font-semibold text-gray-900">Notes:</span>
+                        <p className="text-gray-600">{notes}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                
+                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                  <Button
+                    onClick={() => setStep(2)}
+                    variant="outline"
+                    size="lg"
+                    icon={ArrowLeftIcon}
+                    iconPosition="left"
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    onClick={confirmReservations}
+                    variant="gradient"
+                    size="lg"
+                    icon={CheckCircleIcon}
+                    iconPosition="left"
+                    className="bg-green-600 hover:bg-green-700"
+                  >
+                    Confirm & Submit
+                  </Button>
+                </div>
               </div>
-            </div>
-            <div className="flex justify-center">
-              <button
-                className="btn bg-gray-900 text-white mt-4 w-40 mx-auto hover:bg-gray-700 transition duration-300"
-                onClick={goToStep2}
-              >
-                Next: Your Info →
-              </button>
-            </div>
-          </>
-        )}
-
-        {/* Step 2: User Information */}
-        {step === 2 && (
-          <>
-            <h3 className="text-xl font-semibold text-center mb-4 text-gray-900 font-mono">
-              Enter Your Information
-            </h3>
-            <div className="space-y-2">
-              <input
-                type="text"
-                className="input input-bordered w-full"
-                placeholder="Full Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <input
-                type="email"
-                className="input input-bordered w-full"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                type="tel"
-                className="input input-bordered w-full"
-                placeholder="Phone Number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-              <textarea
-                className="textarea textarea-bordered w-full"
-                placeholder="Notes (optional)"
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-              ></textarea>
-            </div>
-            <div className="flex gap-4 justify-center mt-4">
-              <button
-                className="btn bg-gray-900 text-white w-40 mx-auto hover:bg-gray-700 transition duration-300"
-                onClick={() => setStep(1)}
-              >
-                Back
-              </button>
-              <button
-                className="btn bg-gray-900 text-white w-40 mx-auto hover:bg-gray-700 transition duration-300"
-                onClick={goToStep3}
-              >
-                Next: Confirm →
-              </button>
-            </div>
-          </>
-        )}
-
-        {/* Step 3: Confirmation */}
-        {step === 3 && (
-          <>
-            <h3 className="text-xl font-semibold text-center mb-4 text-gray-900 font-mono">
-              Confirm Your Reservation
-            </h3>
-            <div className="mb-4 text-gray-900 font-mono">
-              <p>
-                <strong>Reservation Dates:</strong> {startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}
-              </p>
-              <p>
-                <strong>Event Type:</strong> {eventType}
-              </p>
-              <p>
-                <strong>Name:</strong> {name}
-              </p>
-              <p>
-                <strong>Email:</strong> {email}
-              </p>
-              <p>
-                <strong>Phone:</strong> {phone}
-              </p>
-              {notes && (
-                <p>
-                  <strong>Notes:</strong> {notes}
-                </p>
-              )}
-            </div>
-            <div className="flex gap-4 justify-center">
-              <button
-                className="btn bg-gray-900 text-white w-40 mx-auto hover:bg-gray-700 transition duration-300"
-                onClick={() => setStep(2)}
-              >
-                Back
-              </button>
-              <button
-                className="btn bg-gray-900 text-white w-40 mx-auto hover:bg-green-500 transition duration-300"
-                onClick={confirmReservations}
-              >
-                Confirm & Submit
-              </button>
-            </div>
-          </>
-        )}
-      </div>
-    </div>
+            )}
+          </Card>
+        </div>
+      </section>
+    </main>
   );
 }
 

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Image from "next/image";
-import { FiSearch } from "react-icons/fi"; // Example icon for hover overlay
+import { FiSearch } from "react-icons/fi";
 
 interface MyLightboxGalleryProps {
   images: { thumbnail: string; full: string }[];
@@ -34,43 +34,42 @@ export default function MyLightboxGallery({ images = [] }: MyLightboxGalleryProp
 
   if (!images.length) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-red-400 to-orange-200">
-        <p className="text-red-600 text-2xl">No images available</p>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-white">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <FiSearch className="w-6 h-6 text-white" />
+          </div>
+          <p className="text-gray-600 text-xl">No images available</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-base-300 py-10">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white py-10">
       <div className="mx-auto max-w-screen-lg px-4">
 
         {/* Heading Section */}
-        <div className="card bg-gradient-to-r from-red-400 to-orange-200 shadow-xl max-w-2xl p-6 mx-auto">
-          <h2 className="text-4xl font-extrabold text-gray-800 text-center mb-2 ">
-            Photo Gallery
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-display">
+            Photo <span className="gradient-text">Gallery</span>
           </h2>
-          <p className="text-center text-gray-900 ">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Explore our recent photos. Click any image to view it in full glory!
           </p>
         </div>
-
-
-        <br></br>
-        <br></br>
-
 
         {/* Responsive Grid Layout */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
           {images.map(({ thumbnail }, index) => (
             <div
               key={index}
-              className="relative overflow-hidden rounded-xl 
+              className="relative overflow-hidden rounded-2xl 
                          hover:shadow-xl cursor-pointer 
                          flex items-center justify-center group 
-                         animate-fadeInUp"
+                         animate-fadeInUp bg-white shadow-soft border border-gray-100"
               onClick={() => setOpenIndex(index)}
               style={{ animationDelay: `${index * 0.05}s` }} 
-              // ^ Stagger effect (each card delays by ~0.05s)
             >
               {/* Thumbnail Image */}
               <Image
@@ -84,9 +83,9 @@ export default function MyLightboxGallery({ images = [] }: MyLightboxGalleryProp
                            duration-300 group-hover:scale-105"
               />
 
-              {/* Hover Overlay (semi-transparent gradient) */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent 
-                              opacity-0 group-hover:opacity-90 
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent 
+                              opacity-0 group-hover:opacity-100 
                               transition-opacity duration-300 flex items-center justify-center">
                 <div className="text-white flex items-center space-x-2">
                   <FiSearch className="text-2xl" />
@@ -96,22 +95,22 @@ export default function MyLightboxGallery({ images = [] }: MyLightboxGalleryProp
             </div>
           ))}
         </div>
+
+        {/* Lightbox */}
+        <Lightbox
+          open={openIndex !== null}
+          index={openIndex || 0}
+          close={() => setOpenIndex(null)}
+          slides={slides}
+          carousel={{
+            finite: true,
+          }}
+          render={{
+            buttonPrev: openIndex === 0 ? () => null : undefined,
+            buttonNext: openIndex === slides.length - 1 ? () => null : undefined,
+          }}
+        />
       </div>
-
-      {/* Lightbox */}
-      <Lightbox
-        open={openIndex !== null}
-        close={() => setOpenIndex(null)}
-        slides={slides}
-        index={openIndex ?? 0}
-      />
-
-      
-
     </div>
-
-    
-
-
   );
 }
