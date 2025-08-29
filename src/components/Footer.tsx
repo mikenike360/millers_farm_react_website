@@ -117,7 +117,7 @@ export default function Footer() {
                 </div>
                 <div className="flex items-center space-x-3">
                   <FaEnvelope className="text-primary-400" />
-                  <span className="text-gray-300">info@millershillfarm.com</span>
+                  <span className="text-gray-300">info@millershill.com</span>
                 </div>
                 <div className="flex items-start space-x-3">
                   <FaMapMarkerAlt className="text-primary-400 mt-1" />

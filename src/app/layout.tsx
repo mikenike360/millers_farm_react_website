@@ -5,6 +5,7 @@ import "./styles/globals.css";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Metadata } from "next";
 
 // Load fonts
 const geistSans = Geist({
@@ -64,7 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 "https://millersfarmislandweddings.com/millers_hill_farm_nighttime.jpg"
               ],
               "telephone": "1-360-739-9262",
-              "email": "info@millershillfarm.com",
+              "email": "info@millershill.com",
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "2206 Tuttle Lane",
@@ -181,19 +182,55 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   );
 }
 
-export const metadata = {
-  title: "Miller's Hill Farm | Wedding & Event Venue on Lummi Island, WA",
-  description:
-    "Nestled on Lummi Island in the San Juan Islands of the Pacific Northwest, Miller's Hill Farm offers a unique venue for weddings and events. Enjoy a converted barn with an indoor/outdoor bar, 10 acres of scenic lawn, a pergola for ceremonies, fire pit, yard games, and more. Contact us for booking details!",
+export const metadata: Metadata = {
+  title: {
+    default: "Miller's Hill Farm - Premier Event Venue on Lummi Island",
+    template: "%s | Miller's Hill Farm"
+  },
+  description: "Discover Miller's Hill Farm, a stunning event venue on Lummi Island, WA. Perfect for weddings, corporate events, and special celebrations with breathtaking views.",
+  keywords: ["event venue", "wedding venue", "Lummi Island", "San Juan Islands", "farm venue", "outdoor events", "Washington state"],
+  authors: [{ name: "Miller's Hill Farm" }],
+  creator: "Miller's Hill Farm",
+  publisher: "Miller's Hill Farm",
+  metadataBase: new URL('https://millershill.com'),
   openGraph: {
-    title: "Miller's Hill Farm | Wedding & Event Venue on Lummi Island, WA",
-    description:
-      "Nestled on Lummi Island in the San Juan Islands, Miller's Hill Farm features a converted barn, expansive lawn, and stunning water views—perfect for weddings and gatherings.",
-    url: "https://millersfarmislandweddings.com/",
-    images: [imageURL],
+    type: "website",
+    locale: "en_US",
+    url: "https://millershill.com",
+    title: "Miller's Hill Farm - Premier Event Venue on Lummi Island",
+    description: "Discover Miller's Hill Farm, a stunning event venue on Lummi Island, WA. Perfect for weddings, corporate events, and special celebrations with breathtaking views.",
+    siteName: "Miller's Hill Farm",
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Miller's Hill Farm Event Venue"
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
+    title: "Miller's Hill Farm - Premier Event Venue on Lummi Island",
+    description: "Discover Miller's Hill Farm, a stunning event venue on Lummi Island, WA. Perfect for weddings, corporate events, and special celebrations with breathtaking views.",
+    images: ["/og.jpg"]
   },
-};
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "your-google-verification-code", // Add your Google verification code
+  },
+  alternates: {
+    canonical: "https://millershill.com",
+  },
+}
 

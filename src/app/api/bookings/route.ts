@@ -28,8 +28,10 @@ export async function POST(req: NextRequest) {
   const { data, error } = await supabase.from("bookings").insert(insertData);
 
   if (error) {
-    console.error("Supabase Insert Error:", error.message);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to create booking" },
+      { status: 500 }
+    );
   }
 
   return NextResponse.json({ success: true, bookings: data });

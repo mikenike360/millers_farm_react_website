@@ -23,40 +23,33 @@ export default function GalleryPage() {
           });
 
         if (error) {
-          console.error("Supabase error:", error);
-          setError("Failed to load images");
+          setError("Failed to fetch images");
           return;
         }
 
-        if (!data || !Array.isArray(data)) {
-          console.warn("Invalid data from Supabase:", data);
-          setError("No images found");
+        if (!data || data.length === 0) {
+          setImages([]);
           return;
         }
 
-        const processedImages = data
-          .map((file) => {
-            if (!file.name) return null;
+        // Process the images - Supabase storage returns FileObject with name property
+        const processedImages = data.map((file) => {
+          const { data: urlData } = supabase.storage
+            .from("millers_farm_images")
+            .getPublicUrl(file.name);
+          
+          // Create both thumbnail and full size URLs
+          const fullUrl = urlData.publicUrl;
+          const thumbnailUrl = `${fullUrl}?width=200&height=200&resize=cover`;
+          
+          return {
+            thumbnail: thumbnailUrl,
+            full: fullUrl
+          };
+        });
 
-            // Generate full-size URL
-            const { data: fullUrlData } = supabase.storage
-              .from("millers_farm_images")
-              .getPublicUrl(file.name);
-
-            // Supabase image transformation: resize dynamically (200x150)
-            const thumbnailUrl = `${fullUrlData.publicUrl}?width=200&height=150&resize=cover`;
-
-            return {
-              thumbnail: thumbnailUrl,  // Dynamically resized thumbnail
-              full: fullUrlData?.publicUrl || "",
-            };
-          })
-          .filter((img): img is { thumbnail: string; full: string } => Boolean(img?.full));
-
-        console.log("Final Image URLs:", processedImages);
         setImages(processedImages);
       } catch (err) {
-        console.error("Error fetching images:", err);
         setError("Failed to load images");
       } finally {
         setLoading(false);
@@ -102,68 +95,102 @@ export default function GalleryPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
       {/* Hero Section */}
-      <section className="relative py-20 px-4 overflow-hidden">
+      <section className="relative py-24 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-secondary-600/10"></div>
+        <div className="absolute inset-0 bg-[url('/hero_bg.jpeg')] bg-cover bg-center opacity-5"></div>
         <div className="relative z-10 max-w-7xl mx-auto text-center">
-          <div className="flex justify-center mb-6">
-            <div className="w-20 h-20 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center">
-              <CameraIcon className="w-6 h-6 text-white" />
+          <div className="flex justify-center mb-8">
+            <div className="w-24 h-24 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-3xl flex items-center justify-center shadow-2xl">
+              <CameraIcon className="w-10 h-10 text-white" />
             </div>
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 font-display">
+          <h1 className="text-6xl md:text-7xl font-bold text-gray-900 mb-8 font-display">
             Our <span className="gradient-text">Gallery</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+          <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-10">
             Take a visual journey through the beautiful moments and stunning settings that make 
             Miller&apos;s Hill Farm the perfect venue for your special day
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
             <Button
               href="/reserve"
               variant="primary"
-              size="lg"
+              size="xl"
               icon={CalendarIcon}
               iconPosition="left"
+              className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
             >
               Book Your Date
             </Button>
             <Button
               href="/contact"
               variant="outline"
-              size="lg"
+              size="xl"
               icon={HeartIcon}
               iconPosition="left"
+              className="border-2 hover:bg-primary-50 transform hover:-translate-y-1 transition-all duration-300"
             >
               Get in Touch
             </Button>
           </div>
-        </div>
-      </section>
-
-      {/* Gallery Stats */}
-      <section className="py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          {/* Quick Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary-600 mb-2">{images.length}+</div>
-              <div className="text-gray-600">Beautiful Images</div>
+              <div className="text-3xl font-bold text-primary-600 mb-2">{images.length}+</div>
+              <div className="text-gray-600 font-medium">Beautiful Images</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-secondary-600 mb-2">10+</div>
-              <div className="text-gray-600">Years of Memories</div>
+              <div className="text-3xl font-bold text-secondary-600 mb-2">10+</div>
+              <div className="text-gray-600 font-medium">Years of Memories</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary-600 mb-2">100+</div>
-              <div className="text-gray-600">Happy Couples</div>
+              <div className="text-3xl font-bold text-primary-600 mb-2">100+</div>
+              <div className="text-gray-600 font-medium">Happy Couples</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Main Gallery */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <MyLightboxGallery images={images} />
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-20 px-4 bg-gradient-to-br from-primary-600 to-secondary-600">
+        <div className="max-w-4xl mx-auto text-center text-white">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 font-display">
+            Ready to <span className="text-yellow-200">Capture</span> Your Moments?
+          </h2>
+          <p className="text-xl text-primary-100 mb-8 leading-relaxed">
+            Book your date at Miller&apos;s Hill Farm and create memories that will last a lifetime. 
+            Our stunning venue is the perfect backdrop for your special day.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Button
+              href="/reserve"
+              variant="outline"
+              size="xl"
+              icon={CalendarIcon}
+              iconPosition="left"
+              className="border-white/30 text-white hover:bg-white hover:text-primary-600"
+            >
+              Reserve Your Date
+            </Button>
+            <Button
+              href="/contact"
+              variant="primary"
+              size="xl"
+              icon={HeartIcon}
+              iconPosition="left"
+              className="bg-white text-primary-600 hover:bg-gray-100"
+            >
+              Contact Us
+            </Button>
+          </div>
         </div>
       </section>
     </main>
