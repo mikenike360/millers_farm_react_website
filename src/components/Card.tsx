@@ -8,7 +8,7 @@ import { IconType } from "react-icons";
 interface CardProps {
   children: React.ReactNode;
   variant?: "default" | "elevated" | "outlined" | "glass" | "gradient";
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
   href?: string;
   onClick?: () => void;
   className?: string;

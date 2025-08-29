@@ -176,17 +176,15 @@ const LocationPage: React.FC = () => {
             </div>
             
             <div className="text-center mt-8">
-              <Button
+              <a
                 href="https://maps.google.com/?q=2206+Tuttle+Lane,+Lummi+Island,+WA+98262"
-                variant="outline"
-                size="lg"
-                icon={MapPinIcon}
-                iconPosition="left"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="inline-flex items-center px-6 py-3 border-2 border-primary-600 text-primary-600 font-semibold rounded-lg hover:bg-primary-600 hover:text-white focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-300"
               >
+                <MapPinIcon className="w-5 h-5 mr-2" />
                 Get Directions
-              </Button>
+              </a>
             </div>
           </div>
         </section>

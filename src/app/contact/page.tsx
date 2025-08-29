@@ -177,16 +177,13 @@ export default function Contact() {
                     ></textarea>
                   </div>
                   
-                  <Button
+                  <button
                     type="submit"
-                    variant="gradient"
-                    size="lg"
-                    icon={ChatBubbleLeftRightIcon}
-                    iconPosition="left"
-                    className="w-full"
+                    className="w-full px-6 py-3 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold rounded-lg hover:from-primary-700 hover:to-secondary-700 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-300 shadow-soft hover:shadow-glow hover:scale-105 flex items-center justify-center"
                   >
+                    <ChatBubbleLeftRightIcon className="w-5 h-5 mr-2" />
                     Send Message
-                  </Button>
+                  </button>
                 </form>
               </Card>
             </div>
@@ -202,18 +199,15 @@ export default function Contact() {
                 </p>
                 
                 <div className="space-y-4">
-                  <Button
+                  <a
                     href="https://maps.google.com/?q=2206+Tuttle+Lane,+Lummi+Island,+WA+98262"
-                    variant="outline"
-                    size="md"
-                    icon={MapPinIcon}
-                    iconPosition="left"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full"
+                    className="w-full px-4 py-2 border-2 border-primary-600 text-primary-600 font-semibold rounded-lg hover:bg-primary-600 hover:text-white focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-300 flex items-center justify-center"
                   >
+                    <MapPinIcon className="w-5 h-5 mr-2" />
                     Get Directions
-                  </Button>
+                  </a>
                   
                   <Button
                     href="/reserve"
