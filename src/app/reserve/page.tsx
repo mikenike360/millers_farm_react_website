@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Event } from "react-big-calendar";
 import { supabase } from "@/components/supabaseClient";
 import AlertModal from "@/components/AlertModal";
+import ReservationCalendar from "@/components/ReservationCalendar";
 import { 
   CalendarIcon, 
   UserIcon, 
@@ -31,7 +32,7 @@ function ReservationContent() {
   const initialEndDate = urlEndDate ? new Date(urlEndDate) : null;
 
   // Extract eventType from URL
-  const urlEventType = searchParams.get("eventType") || "Not Defined";
+  const urlEventType = searchParams.get("eventType") || "Wedding";
   const [eventType, setEventType] = useState<string>(urlEventType);
 
   const [bookings, setBookings] = useState<BookingEvent[]>([]);
@@ -68,6 +69,21 @@ function ReservationContent() {
       setAlertMessage("Please enter both a start and end date before continuing.");
       return;
     }
+
+    // Check if dates are in the past
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set to start of day for accurate comparison
+    
+    if (startDate < today) {
+      setAlertMessage("Start date cannot be in the past. Please select a future date.");
+      return;
+    }
+    
+    if (endDate < today) {
+      setAlertMessage("End date cannot be in the past. Please select a future date.");
+      return;
+    }
+
     setStep(2);
   };
 
@@ -76,12 +92,16 @@ function ReservationContent() {
       setAlertMessage("Please enter your name, email, and phone number.");
       return;
     }
+    if (!eventType || eventType.trim() === "") {
+      setAlertMessage("Please select an event type.");
+      return;
+    }
     setStep(3);
   };
 
   const confirmReservations = async () => {
     const reservationEvent: BookingEvent = {
-      title: `${name}'s Reservation`,
+      title: `${name}'s ${eventType}`,
       start: startDate!,
       end: endDate!,
       allDay: true,
@@ -97,6 +117,7 @@ function ReservationContent() {
         email,
         phone,
         notes,
+        eventType,
       }),
     });
 
@@ -194,6 +215,31 @@ function ReservationContent() {
                     Choose the perfect dates for your special event
                   </p>
                 </div>
+
+                {/* Availability Calendar */}
+                <div className="mb-8">
+                  <ReservationCalendar
+                    onDateSelect={(start, end) => {
+                      // If start and end are the same, this is the first selection
+                      if (start.getTime() === end.getTime()) {
+                        setStartDate(start);
+                        setEndDate(null); // Clear end date for first selection
+                      } else {
+                        // This is the second selection, set both dates
+                        setStartDate(start);
+                        setEndDate(end);
+                      }
+                    }}
+                    selectedStartDate={startDate}
+                    selectedEndDate={endDate}
+                  />
+                </div>
+
+                <div className="text-center">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                    Or manually select your dates below
+                  </h4>
+                </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="space-y-3">
@@ -208,6 +254,7 @@ function ReservationContent() {
                       dateFormat="MMMM d, yyyy"
                       popperClassName="z-50"
                       popperPlacement="bottom-start"
+                      minDate={new Date()}
                     />
                   </div>
 
@@ -223,6 +270,7 @@ function ReservationContent() {
                       dateFormat="MMMM d, yyyy"
                       popperClassName="z-50"
                       popperPlacement="bottom-start"
+                      minDate={startDate || new Date()}
                     />
                   </div>
 
@@ -375,7 +423,7 @@ function ReservationContent() {
                     </div>
                     <div>
                       <span className="font-semibold text-gray-900">Event Type:</span>
-                      <p className="text-gray-600">{eventType}</p>
+                      <p className="text-gray-600">{eventType || "Wedding"}</p>
                     </div>
                     <div>
                       <span className="font-semibold text-gray-900">Name:</span>
