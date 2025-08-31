@@ -100,7 +100,7 @@ export default function GalleryPage() {
         <div className="absolute inset-0 bg-[url('/hero_bg.jpeg')] bg-cover bg-center opacity-5"></div>
         <div className="relative z-10 max-w-7xl mx-auto text-center">
           <div className="flex justify-center mb-8">
-            <div className="w-24 h-24 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-3xl flex items-center justify-center shadow-2xl">
+            <div className="w-20 h-20 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <CameraIcon className="w-10 h-10 text-white" />
             </div>
           </div>

@@ -368,7 +368,7 @@ export default function AdminPanel() {
         <div className="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-secondary-600/10"></div>
         <div className="relative z-10 max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center mb-6">
-            <ShieldCheckIcon className="w-12 h-12 text-primary-600 mr-4" />
+            <ShieldCheckIcon className="w-16 h-16 text-primary-600 mr-4" />
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 font-display">
               Admin <span className="gradient-text">Panel</span>
             </h1>
@@ -383,7 +383,7 @@ export default function AdminPanel() {
               </p>
               <div className="mt-2 flex items-center justify-center space-x-4">
                 <div className="flex items-center">
-                  <BellIcon className={`w-5 h-5 mr-2 ${notificationsEnabled ? 'text-green-600' : 'text-gray-400'}`} />
+                  <BellIcon className={`w-6 h-6 mr-2 ${notificationsEnabled ? 'text-green-600' : 'text-gray-400'}`} />
                   <span className="text-sm">
                     {notificationsEnabled ? 'Notifications enabled' : 'Notifications disabled'}
                   </span>
@@ -407,7 +407,7 @@ export default function AdminPanel() {
             <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
               <div className="flex items-center">
                 <div className="p-3 bg-blue-100 rounded-xl">
-                  <ClockIcon className="w-8 h-8 text-blue-600" />
+                  <ClockIcon className="w-10 h-10 text-blue-600" />
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-gray-600">Pending</p>
@@ -419,7 +419,7 @@ export default function AdminPanel() {
             <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
               <div className="flex items-center">
                 <div className="p-3 bg-green-100 rounded-xl">
-                  <CheckCircleIcon className="w-8 h-8 text-green-600" />
+                  <CheckCircleIcon className="w-10 h-10 text-green-600" />
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-gray-600">Confirmed</p>
@@ -431,7 +431,7 @@ export default function AdminPanel() {
             <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
               <div className="flex items-center">
                 <div className="p-3 bg-purple-100 rounded-xl">
-                  <CalendarIcon className="w-8 h-8 text-purple-600" />
+                  <CalendarIcon className="w-10 h-10 text-purple-600" />
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-gray-600">Total</p>
@@ -445,7 +445,7 @@ export default function AdminPanel() {
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 mb-8">
             <div className="p-6 border-b border-gray-100">
               <h3 className="text-2xl font-bold text-gray-900 flex items-center">
-                <ClockIcon className="w-6 h-6 text-orange-500 mr-3" />
+                <ClockIcon className="w-8 h-8 text-orange-500 mr-3" />
                 Pending Reservations
                 {newReservationCount > 0 && (
                   <span className="ml-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold animate-pulse">
@@ -458,7 +458,7 @@ export default function AdminPanel() {
             
             {pendingBookings.length === 0 ? (
               <div className="p-8 text-center">
-                <ClockIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                <ClockIcon className="w-20 h-20 text-gray-300 mx-auto mb-4" />
                 <p className="text-gray-500 text-lg">No pending reservations</p>
                 <p className="text-gray-400">All current bookings have been confirmed</p>
               </div>
@@ -479,7 +479,7 @@ export default function AdminPanel() {
                         <td className="px-6 py-4">
                           <div className="flex items-center">
                             <div className="p-2 bg-blue-100 rounded-full">
-                              <UserIcon className="w-5 h-5 text-blue-600" />
+                              <UserIcon className="w-6 h-6 text-blue-600" />
                             </div>
                             <div className="ml-3">
                               <p className="text-sm font-medium text-gray-900">{booking.name}</p>
@@ -491,7 +491,7 @@ export default function AdminPanel() {
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex items-center">
-                            <CalendarIcon className="w-4 h-4 text-gray-400 mr-2" />
+                            <CalendarIcon className="w-6 h-6 text-gray-400 mr-2" />
                             <div>
                               <p className="text-sm text-gray-900">
                                 {new Date(booking.start_date).toLocaleDateString()} - {new Date(booking.end_date).toLocaleDateString()}
@@ -505,11 +505,11 @@ export default function AdminPanel() {
                         <td className="px-6 py-4">
                           <div className="space-y-1">
                             <div className="flex items-center text-sm text-gray-900">
-                              <EnvelopeIcon className="w-4 h-4 text-gray-400 mr-2" />
+                              <EnvelopeIcon className="w-6 h-6 text-gray-400 mr-2" />
                               {booking.email}
                             </div>
                             <div className="flex items-center text-sm text-gray-900">
-                              <PhoneIcon className="w-4 h-4 text-gray-400 mr-2" />
+                              <PhoneIcon className="w-6 h-6 text-gray-400 mr-2" />
                               {booking.phone}
                             </div>
                           </div>
@@ -520,14 +520,14 @@ export default function AdminPanel() {
                               onClick={() => confirmBooking(booking.id)}
                               className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
                             >
-                              <CheckCircleIcon className="w-4 h-4 mr-1" />
+                              <CheckCircleIcon className="w-6 h-6 mr-1" />
                               Confirm
                             </button>
                             <button
                               onClick={() => showDeleteConfirmation(booking.id, booking.name)}
                               className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
                             >
-                              <TrashIcon className="w-4 h-4 mr-1" />
+                              <TrashIcon className="w-6 h-6 mr-1" />
                               Delete
                             </button>
                           </div>
@@ -544,7 +544,7 @@ export default function AdminPanel() {
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100">
             <div className="p-6 border-b border-gray-100">
               <h3 className="text-2xl font-bold text-gray-900 flex items-center">
-                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-3" />
+                <CheckCircleIcon className="w-8 h-8 text-green-500 mr-3" />
                 Confirmed Reservations
               </h3>
               <p className="text-gray-600 mt-2">All confirmed and active bookings</p>
@@ -552,7 +552,7 @@ export default function AdminPanel() {
             
             {confirmedBookings.length === 0 ? (
               <div className="p-8 text-center">
-                <CheckCircleIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                <CheckCircleIcon className="w-20 h-20 text-gray-300 mx-auto mb-4" />
                 <p className="text-gray-500 text-lg">No confirmed reservations</p>
                 <p className="text-gray-400">Confirmed bookings will appear here</p>
               </div>
@@ -574,7 +574,7 @@ export default function AdminPanel() {
                         <td className="px-6 py-4">
                           <div className="flex items-center">
                             <div className="p-2 bg-green-100 rounded-full">
-                              <UserIcon className="w-5 h-5 text-green-600" />
+                              <UserIcon className="w-6 h-6 text-green-600" />
                             </div>
                             <div className="ml-3">
                               <p className="text-sm font-medium text-gray-900">{booking.name}</p>
@@ -586,7 +586,7 @@ export default function AdminPanel() {
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex items-center">
-                            <CalendarIcon className="w-4 h-4 text-gray-400 mr-2" />
+                            <CalendarIcon className="w-6 h-6 text-gray-400 mr-2" />
                             <div>
                               <p className="text-sm text-gray-900">
                                 {new Date(booking.start_date).toLocaleDateString()} - {new Date(booking.end_date).toLocaleDateString()}
@@ -600,11 +600,11 @@ export default function AdminPanel() {
                         <td className="px-6 py-4">
                           <div className="space-y-1">
                             <div className="flex items-center text-sm text-gray-900">
-                              <EnvelopeIcon className="w-4 h-4 text-gray-400 mr-2" />
+                              <EnvelopeIcon className="w-6 h-6 text-gray-400 mr-2" />
                               {booking.email}
                             </div>
                             <div className="flex items-center text-sm text-gray-900">
-                              <PhoneIcon className="w-4 h-4 text-gray-400 mr-2" />
+                              <PhoneIcon className="w-6 h-6 text-gray-400 mr-2" />
                               {booking.phone}
                             </div>
                           </div>
@@ -612,7 +612,7 @@ export default function AdminPanel() {
                         <td className="px-6 py-4">
                           {booking.notes ? (
                             <div className="flex items-start">
-                              <DocumentTextIcon className="w-4 h-4 text-gray-400 mr-2 mt-0.5" />
+                              <DocumentTextIcon className="w-6 h-6 text-gray-400 mr-2 mt-0.5" />
                               <p className="text-sm text-gray-900 max-w-xs truncate" title={booking.notes}>
                                 {booking.notes}
                               </p>
@@ -626,7 +626,7 @@ export default function AdminPanel() {
                             onClick={() => showDeleteConfirmation(booking.id, booking.name)}
                             className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
                           >
-                            <TrashIcon className="w-4 h-4 mr-1" />
+                            <TrashIcon className="w-6 h-6 mr-1" />
                             Delete
                           </button>
                         </td>
@@ -663,7 +663,7 @@ export default function AdminPanel() {
                       onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1))}
                       className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
                     >
-                      <ChevronLeftIcon className="w-5 h-5" />
+                      <ChevronLeftIcon className="w-6 h-6" />
                     </button>
                     <h4 className="text-lg font-semibold text-gray-900">
                       {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
@@ -672,7 +672,7 @@ export default function AdminPanel() {
                       onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))}
                       className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
                     >
-                      <ChevronRightIcon className="w-5 h-5" />
+                      <ChevronRightIcon className="w-6 h-6" />
                     </button>
                   </div>
                   
@@ -751,15 +751,15 @@ export default function AdminPanel() {
                   <div className="mt-4 text-sm text-gray-600">
                     <div className="flex items-center space-x-4">
                       <div className="flex items-center">
-                        <div className="w-3 h-3 bg-blue-500 rounded mr-2"></div>
+                        <div className="w-4 h-4 bg-blue-500 rounded mr-2"></div>
                         <span>Selected</span>
                       </div>
                       <div className="flex items-center">
-                        <div className="w-3 h-3 bg-yellow-100 rounded mr-2"></div>
+                        <div className="w-4 h-4 bg-yellow-100 rounded mr-2"></div>
                         <span>Confirmed</span>
                       </div>
                       <div className="flex items-center">
-                        <div className="w-3 h-3 bg-red-100 rounded mr-2"></div>
+                        <div className="w-4 h-4 bg-red-100 rounded mr-2"></div>
                         <span>Pending</span>
                       </div>
                     </div>

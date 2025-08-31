@@ -168,7 +168,7 @@ const ServicesPage: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl mb-6">
-              <CheckCircleIcon className="w-6 h-6 text-white" />
+              <CheckCircleIcon className="w-8 h-8 text-white" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-display">
               Venue <span className="gradient-text">Features</span>
@@ -199,7 +199,7 @@ const ServicesPage: React.FC = () => {
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl mb-4 border border-white/20">
-              <HeartIcon className="w-6 h-6 text-white" />
+              <HeartIcon className="w-8 h-8 text-white" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-display">
               Wedding <span className="gradient-text">Services</span>
@@ -265,7 +265,7 @@ const ServicesPage: React.FC = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl mb-6">
-              <ShieldCheckIcon className="w-6 h-6 text-white" />
+              <ShieldCheckIcon className="w-8 h-8 text-white" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-display">
               Important <span className="gradient-text">Policies</span>

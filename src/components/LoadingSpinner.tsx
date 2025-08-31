@@ -53,7 +53,7 @@ export function LoadingDots({ text = "Loading..." }: { text?: string }) {
         {[0, 1, 2].map((i) => (
           <div
             key={i}
-            className="w-3 h-3 bg-primary-600 rounded-full animate-bounce"
+            className="w-4 h-4 bg-primary-600 rounded-full animate-bounce"
             style={{ animationDelay: `${i * 0.1}s` }}
           ></div>
         ))}

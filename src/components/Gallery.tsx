@@ -189,7 +189,7 @@ export default function MyLightboxGallery({ images = [] }: MyLightboxGalleryProp
                                : 'bg-white/90 text-gray-700 hover:bg-white'}`}
                   onClick={(e) => handleLike(index, e)}
                 >
-                  <FiHeart className={`w-4 h-4 ${likedImages.has(index) ? 'fill-current' : ''}`} />
+                  <FiHeart className={`w-5 h-5 ${likedImages.has(index) ? 'fill-current' : ''}`} />
                 </button>
                 <button 
                   className="w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full 
@@ -197,7 +197,7 @@ export default function MyLightboxGallery({ images = [] }: MyLightboxGalleryProp
                              hover:bg-white transition-colors duration-200 shadow-lg"
                   onClick={(e) => handleShare(index, e)}
                 >
-                  <FiShare2 className="w-4 h-4" />
+                  <FiShare2 className="w-5 h-5" />
                 </button>
               </div>
             </div>

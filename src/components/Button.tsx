@@ -65,7 +65,7 @@ export default function Button({
   const content = (
     <>
       {loading && (
-        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
       )}
       {Icon && iconPosition === "left" && !loading && (
         <Icon className="mr-2" />

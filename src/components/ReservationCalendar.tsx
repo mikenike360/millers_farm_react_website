@@ -195,24 +195,24 @@ export default function ReservationCalendar({
       {/* Legend */}
       <div className="flex items-center justify-center space-x-6 mb-4 text-sm">
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-white border-2 border-gray-300 rounded"></div>
-          <span className="text-gray-600">Available</span>
+          <div className="w-5 h-5 bg-white border-2 border-gray-300 rounded"></div>
+          <span className="text-sm text-gray-600">Available</span>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-red-100 border-2 border-red-300 rounded"></div>
-          <span className="text-gray-600">Pending</span>
+          <div className="w-5 h-5 bg-red-100 border-2 border-red-300 rounded"></div>
+          <span className="text-sm text-gray-600">Booked</span>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-blue-500 border-2 border-blue-600 rounded"></div>
-          <span className="text-gray-600">Selected</span>
+          <div className="w-5 h-5 bg-blue-500 border-2 border-blue-600 rounded"></div>
+          <span className="text-sm text-gray-600">Selected</span>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-blue-100 border-2 border-blue-200 rounded"></div>
-          <span className="text-gray-600">Range</span>
+          <div className="w-5 h-5 bg-blue-100 border-2 border-blue-200 rounded"></div>
+          <span className="text-sm text-gray-600">In Range</span>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="w-4 h-4 bg-yellow-100 border-2 border-yellow-300 rounded"></div>
-          <span className="text-gray-600">Confirmed</span>
+          <div className="w-5 h-5 bg-yellow-100 border-2 border-yellow-300 rounded"></div>
+          <span className="text-sm text-gray-600">Confirmed</span>
         </div>
       </div>
 
@@ -294,9 +294,9 @@ export default function ReservationCalendar({
                 {isBooked && (
                   <div className="ml-1">
                     {isConfirmed ? (
-                      <CheckCircleIcon className="w-4 h-4 text-yellow-600" />
+                      <CheckCircleIcon className="w-5 h-5 text-yellow-600" />
                     ) : (
-                      <XCircleIcon className="w-4 h-4 text-red-600" />
+                      <XCircleIcon className="w-5 h-5 text-red-600" />
                     )}
                   </div>
                 )}

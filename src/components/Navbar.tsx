@@ -73,7 +73,7 @@ export default function Navbar() {
           </div>
           
           {/* Desktop: Logo on left */}
-          <Link href="/" className="hidden md:flex items-center gap-3 ml-2 py-0 group">
+          <Link href="/" className="hidden md:flex items-center ml-2 py-0 group">
             <div className="relative overflow-hidden rounded-2xl">
               <Image
                 src="/logo.png"
@@ -83,18 +83,6 @@ export default function Navbar() {
                 className="object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-2"
                 priority
               />
-            </div>
-            <div className="hidden xl:block">
-              <h1 className={`text-xl font-bold transition-colors duration-300 ${
-                isScrolled ? "text-gray-800" : "text-white"
-              }`}>
-                Miller&apos;s Hill Farm
-              </h1>
-              <p className={`text-sm transition-colors duration-300 ${
-                isScrolled ? "text-gray-600" : "text-white/80"
-              }`}>
-                Wedding & Event Venue
-              </p>
             </div>
           </Link>
         </div>

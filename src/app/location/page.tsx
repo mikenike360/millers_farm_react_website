@@ -98,7 +98,7 @@ const LocationPage: React.FC = () => {
           <div className="relative z-10 max-w-7xl mx-auto text-center">
             <div className="flex justify-center mb-6">
               <div className="w-20 h-20 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center">
-                <MapPinIcon className="w-6 h-6 text-white" />
+                <MapPinIcon className="w-8 h-8 text-white" />
               </div>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-display">
@@ -182,7 +182,7 @@ const LocationPage: React.FC = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 border-2 border-primary-600 text-primary-600 font-semibold rounded-lg hover:bg-primary-600 hover:text-white focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-300"
               >
-                <MapPinIcon className="w-5 h-5 mr-2" />
+                <MapPinIcon className="w-6 h-6 mr-2" />
                 Get Directions
               </a>
             </div>

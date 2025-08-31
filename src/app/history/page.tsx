@@ -55,7 +55,7 @@ const HistoryPage: React.FC = () => {
         <div className="relative z-10 max-w-7xl mx-auto text-center">
           <div className="flex justify-center mb-6">
             <div className="w-20 h-20 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center">
-              <HeartIcon className="w-8 h-8 text-white" />
+              <HeartIcon className="w-10 h-10 text-white" />
             </div>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 font-display">
@@ -65,6 +65,33 @@ const HistoryPage: React.FC = () => {
             A family legacy spanning over 75 years, from naval service to memorable weddings and events. 
             Discover the story behind our beloved venue.
           </p>
+        </div>
+      </section>
+
+      {/* Fall Season Hero Image */}
+      <section className="py-6 px-4 bg-gradient-to-br from-amber-50 to-orange-50">
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-600/20 to-orange-600/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <Image
+              src="/fall_season_millers_hill_farm.jpg"
+              alt="Fall Season at Miller's Hill Farm - Beautiful autumn landscape with red barn and golden trees"
+              width={400}
+              height={300}
+              className="relative w-full h-auto object-cover object-center rounded-xl shadow-soft transition-all duration-500 group-hover:scale-105 group-hover:shadow-xl"
+              style={{ objectPosition: 'center 20%' }}
+            />
+          </div>
+          <div className="mt-4">
+            <h2 className="text-xl font-bold text-gray-900 mb-2 font-display">
+              A <span className="gradient-text">Seasonal</span> Paradise
+            </h2>
+            <p className="text-sm text-gray-600 max-w-xl mx-auto leading-relaxed">
+              Experience the breathtaking beauty of Miller&apos;s Hill Farm throughout the seasons. 
+              This stunning autumn view showcases our iconic red barn nestled among golden trees, 
+              creating the perfect backdrop for your special moments.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -162,17 +189,17 @@ const HistoryPage: React.FC = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-              <HomeIcon className="w-8 h-8 mx-auto mb-4 text-white/80" />
+                              <HomeIcon className="w-10 h-10 mx-auto mb-4 text-white/80" />
               <h3 className="text-xl font-bold mb-3">Family Home</h3>
               <p className="text-white/90">Built with love and maintained with care for over 75 years</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-              <PaperAirplaneIcon className="w-8 h-8 mx-auto mb-4 text-white/80" />
+                              <PaperAirplaneIcon className="w-10 h-10 mx-auto mb-4 text-white/80" />
               <h3 className="text-xl font-bold mb-3">Aviation Heritage</h3>
               <p className="text-white/90">Jack&apos;s flying dreams live on in our historic hangar</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-              <UsersIcon className="w-8 h-8 mx-auto mb-4 text-white/80" />
+                              <UsersIcon className="w-10 h-10 mx-auto mb-4 text-white/80" />
               <h3 className="text-xl font-bold mb-3">Community Gathering</h3>
               <p className="text-white/90">From family potlucks to beautiful weddings</p>
             </div>
