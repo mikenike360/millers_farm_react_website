@@ -16,7 +16,8 @@ import {
   ShieldCheckIcon,
   BellIcon,
   ChevronLeftIcon,
-  ChevronRightIcon
+  ChevronRightIcon,
+  ArrowRightOnRectangleIcon
 } from "@heroicons/react/24/outline";
 
 const ADMIN_EMAILS = ["michael.venema2010@gmail.com"];
@@ -60,6 +61,16 @@ export default function AdminPanel() {
   const [manualNotes, setManualNotes] = useState("");
   
   const router = useRouter();
+
+  // Handle logout
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (!error) {
+      router.push("/login");
+    } else {
+      setAlertMessage("Error logging out. Please try again.");
+    }
+  };
 
   // Request notification permissions
   useEffect(() => {
@@ -393,6 +404,15 @@ export default function AdminPanel() {
                     {newReservationCount} new
                   </div>
                 )}
+              </div>
+              <div className="mt-4 flex justify-center">
+                <button
+                  onClick={handleLogout}
+                  className="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-300 text-sm font-medium"
+                >
+                  <ArrowRightOnRectangleIcon className="w-4 h-4 mr-2" />
+                  Logout
+                </button>
               </div>
             </div>
           )}

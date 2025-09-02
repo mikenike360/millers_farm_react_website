@@ -1,5 +1,4 @@
 "use client";
-
 import React from 'react';
 import Script from 'next/script';
 import { 
@@ -448,6 +447,71 @@ const ServicesPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Miller's Hill Farm Wedding & Event Services",
+            "description": "Comprehensive wedding and event services including venue rental, ceremony platform, fire pit, camping options, and on-site assistance.",
+            "provider": {
+              "@type": "LocalBusiness",
+              "name": "Miller's Hill Farm",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "2206 Tuttle Lane",
+                "addressLocality": "Lummi Island",
+                "addressRegion": "WA",
+                "postalCode": "98262",
+                "addressCountry": "US"
+              }
+            },
+            "serviceType": ["Wedding Venue", "Event Venue", "Corporate Events"],
+            "areaServed": {
+              "@type": "GeoCircle",
+              "geoMidpoint": {
+                "@type": "GeoCoordinates",
+                "latitude": "48.72159088961969",
+                "longitude": "-122.69856615392804"
+              },
+              "geoRadius": "100000"
+            },
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Venue Services",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "10 Acres of Lawn & Garden",
+                    "description": "Open lawn and garden areas with beautiful views of the San Juan Islands"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Red Barn Venue",
+                    "description": "24 x 30 barn with indoor/outdoor bar area, refrigerator, and woodstove"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Wedding Ceremony Platform",
+                    "description": "Dedicated platform with pergola perfect for wedding ceremonies"
+                  }
+                }
+              ]
+            }
+          }),
+        }}
+      />
     </main>
   );
 };

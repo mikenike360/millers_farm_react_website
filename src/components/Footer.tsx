@@ -141,7 +141,15 @@ export default function Footer() {
               <div className="flex items-center space-x-2 text-gray-400 text-sm">
                 <span>Made with</span>
                 <FaHeart className="text-red-500 animate-pulse" />
-                <span>by VenomLabs</span>
+                <span>by </span>
+                <a 
+                  href="https://www.venomlabs.xyz/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary-400 hover:text-primary-300 transition-colors duration-300 underline"
+                >
+                  VenomLabs
+                </a>
               </div>
             </div>
           </div>

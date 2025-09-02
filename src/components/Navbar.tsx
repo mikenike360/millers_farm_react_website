@@ -17,11 +17,7 @@ export default function Navbar() {
 
   return (
     <div 
-      className={`navbar fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out py-0 ${
-        isScrolled 
-          ? "bg-gray-900/95 backdrop-blur-md shadow-soft border-b border-gray-700/50" 
-          : "bg-gradient-to-r from-primary-600/95 to-secondary-600/95 backdrop-blur-md"
-      }`}
+      className="navbar fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out py-0 bg-gradient-to-r from-primary-600/95 to-secondary-600/95 backdrop-blur-md shadow-soft"
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Left Section: Mobile Hamburger and Desktop Logo */}
@@ -120,11 +116,7 @@ export default function Navbar() {
                 <li key={index}>
                   <Link 
                     href={item.href}
-                    className={`py-3 px-4 rounded-xl font-medium transition-all duration-300 hover:scale-105 ${
-                      isScrolled 
-                        ? "text-gray-700 hover:text-primary-600 hover:bg-primary-50" 
-                        : "text-white hover:text-white hover:bg-white/20"
-                    }`}
+                    className="py-3 px-4 rounded-xl font-medium transition-all duration-300 hover:scale-105 text-white hover:text-white hover:bg-white/20"
                   >
                     {item.label}
                   </Link>

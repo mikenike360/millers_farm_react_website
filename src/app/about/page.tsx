@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import { MapPinIcon, CakeIcon, BriefcaseIcon, SparklesIcon, HeartIcon, UsersIcon, CalendarIcon, StarIcon, HomeIcon, PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import Button from "@/components/Button";

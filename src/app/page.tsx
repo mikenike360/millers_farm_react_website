@@ -150,7 +150,7 @@ export default function Home() {
               size="xl"
               icon={FaSearch}
               iconPosition="left"
-              className="border-white/30 text-white hover:bg-white hover:text-primary-600"
+              className="border-white/30 text-white hover:bg-white/20 hover:text-white"
             >
               View Gallery
             </Button>
@@ -313,7 +313,7 @@ export default function Home() {
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            {["gallery-image1.jpg", "gallery-image2.jpg", "gallery-image3.jpg"].map((image, index) => (
+            {[ "barn_at_night.png", "gallery-image1.jpg","gallery-image3.jpg"].map((image, index) => (
               <div key={index} className="relative group overflow-hidden rounded-2xl shadow-soft hover:shadow-xl transition-all duration-500 transform hover:-translate-y-4">
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300"></div>
                 <img
@@ -331,12 +331,40 @@ export default function Home() {
             size="lg"
             icon={FaSearch}
             iconPosition="left"
-            className="border-white/30 text-white hover:bg-white hover:text-primary-600 bg-white/10 backdrop-blur-md"
+            className="border-white/30 text-white hover:bg-white/20 hover:text-white bg-white/10 backdrop-blur-md"
           >
             View Full Gallery
           </Button>
         </div>
       </section>
+
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Miller's Hill Farm Home",
+            "description": "Miller's Hill Farm is a stunning wedding and event venue on Lummi Island, Washington. Featuring a converted barn, expansive lawn, and breathtaking San Juan Islands views.",
+            "url": "https://millershill.com",
+            "mainEntity": {
+              "@type": "LocalBusiness",
+              "name": "Miller's Hill Farm",
+              "image": "https://millershill.com/og.jpg",
+              "telephone": "1-360-739-9262",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "2206 Tuttle Lane",
+                "addressLocality": "Lummi Island",
+                "addressRegion": "WA",
+                "postalCode": "98262",
+                "addressCountry": "US"
+              }
+            }
+          }),
+        }}
+      />
     </main>
   );
 }
