@@ -78,7 +78,7 @@ export default function Contact() {
                 size="md"
                 icon={info.icon}
                 iconColor={info.color}
-                iconSize={16}
+                iconSize={32}
                 className="text-center group hover:transform hover:-translate-y-2"
               >
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{info.title}</h3>
@@ -215,7 +215,7 @@ export default function Contact() {
                     size="md"
                     icon={CalendarIcon}
                     iconPosition="left"
-                    className="w-full"
+                    className="w-full min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
                   >
                     Schedule a Tour
                   </Button>
@@ -255,7 +255,7 @@ export default function Contact() {
               size="xl"
               icon={CalendarIcon}
               iconPosition="left"
-              className="border-white/30 text-white hover:bg-white hover:text-primary-600"
+              className="border-white/30 text-white hover:bg-primary-600 hover:text-white min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
             >
               Reserve Your Date
             </Button>
@@ -265,7 +265,7 @@ export default function Contact() {
               size="xl"
               icon={PhoneIcon}
               iconPosition="left"
-              className="bg-white text-primary-600 hover:bg-gray-100"
+              className="bg-primary-600 text-white hover:bg-primary-700 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
             >
               Call Now
             </Button>

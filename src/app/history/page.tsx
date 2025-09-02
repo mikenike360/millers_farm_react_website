@@ -29,7 +29,8 @@ const HistoryPage: React.FC = () => {
       title: "Marriage & Family",
       description: "Jack and Lucille were married and built a home where they raised their three children. Jack raised cattle and maintained a large, bountiful vegetable garden.",
       image: "/millers_retreat.jpg",
-      imageAlt: "Miller's Retreat"
+      imageAlt: "Miller's Retreat",
+      showCabinLink: true
     },
     {
       year: "1970s",
@@ -41,9 +42,9 @@ const HistoryPage: React.FC = () => {
     {
       year: "2000s",
       title: "Wedding Venue",
-      description: "After hosting family weddings, inquiries from others led to the birth of Miller's Farm Island Weddings, sharing this beautiful sanctuary with couples.",
-      image: "/reef.jpg",
-      imageAlt: "Reef"
+      description: "After hosting family weddings and other events, inquiries from friends and neighbors led to the birth of Miller's Hill Farm, sharing this beautiful sanctuary with the public!",
+      image: "/illuminating_the_dark.png",
+      imageAlt: "Illuminating the Dark"
     }
   ];
 
@@ -53,11 +54,6 @@ const HistoryPage: React.FC = () => {
       <section className="relative py-20 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-secondary-600/10"></div>
         <div className="relative z-10 max-w-7xl mx-auto text-center">
-          <div className="flex justify-center mb-6">
-            <div className="w-20 h-20 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center">
-              <HeartIcon className="w-10 h-10 text-white" />
-            </div>
-          </div>
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 font-display">
             The Rich <span className="gradient-text">History</span> of Miller&apos;s Hill Farm
           </h1>
@@ -68,32 +64,7 @@ const HistoryPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Fall Season Hero Image */}
-      <section className="py-6 px-4 bg-gradient-to-br from-amber-50 to-orange-50">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-r from-amber-600/20 to-orange-600/20 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <Image
-              src="/fall_season_millers_hill_farm.jpg"
-              alt="Fall Season at Miller's Hill Farm - Beautiful autumn landscape with red barn and golden trees"
-              width={400}
-              height={300}
-              className="relative w-full h-auto object-cover object-center rounded-xl shadow-soft transition-all duration-500 group-hover:scale-105 group-hover:shadow-xl"
-              style={{ objectPosition: 'center 20%' }}
-            />
-          </div>
-          <div className="mt-4">
-            <h2 className="text-xl font-bold text-gray-900 mb-2 font-display">
-              A <span className="gradient-text">Seasonal</span> Paradise
-            </h2>
-            <p className="text-sm text-gray-600 max-w-xl mx-auto leading-relaxed">
-              Experience the breathtaking beauty of Miller&apos;s Hill Farm throughout the seasons. 
-              This stunning autumn view showcases our iconic red barn nestled among golden trees, 
-              creating the perfect backdrop for your special moments.
-            </p>
-          </div>
-        </div>
-      </section>
+
 
       {/* Introduction Section */}
       <section className="py-20 px-4">
@@ -117,8 +88,8 @@ const HistoryPage: React.FC = () => {
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-primary-600/20 to-secondary-600/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <Image
-                src="/JackLucille.jpg"
-                alt="Jack and Lucille"
+                src="/hangar.jpg"
+                alt="Historic Hangar"
                 width={600}
                 height={400}
                 className="relative w-full h-auto object-cover rounded-2xl shadow-soft transition-all duration-500 group-hover:scale-105 group-hover:shadow-xl"
@@ -148,12 +119,25 @@ const HistoryPage: React.FC = () => {
                 <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                   <div className="bg-white rounded-2xl shadow-soft border border-gray-100 p-8 hover:shadow-xl transition-all duration-300">
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center">
+                      <div className="w-16 h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center px-2">
                         <span className="text-white font-bold text-lg">{event.year}</span>
                       </div>
                       <h3 className="text-2xl font-bold text-gray-900">{event.title}</h3>
                     </div>
-                    <p className="text-gray-600 leading-relaxed">{event.description}</p>
+                    <p className="text-gray-600 leading-relaxed mb-4">{event.description}</p>
+                    {event.showCabinLink && (
+                      <div className="text-center">
+                        <a
+                          href="https://stay-sea.hosted.ownerrez.com/millers-island-retreat-orp5b664f0x"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold rounded-lg hover:from-primary-700 hover:to-secondary-700 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-300 shadow-soft hover:shadow-glow hover:scale-105 text-sm"
+                        >
+                          <HomeIcon className="w-4 h-4 mr-2" />
+                          Rent Our Family Cabin
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </div>
                 
@@ -222,11 +206,11 @@ const HistoryPage: React.FC = () => {
             The beautiful venue that continues to create memories for generations to come
           </p>
           
-          <div className="relative group">
+          <div className="relative group max-w-4xl mx-auto">
             <div className="absolute inset-0 bg-gradient-to-r from-primary-600/20 to-secondary-600/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             <Image
-              src="/millers_hill_farm_nighttime.jpg"
-              alt="Miller's Hill Farm at Night"
+              src="/barn_at_night.png"
+              alt="Barn at Night"
               width={800}
               height={600}
               className="relative w-full h-auto object-cover rounded-2xl shadow-soft transition-all duration-500 group-hover:scale-105 group-hover:shadow-xl"
@@ -251,6 +235,7 @@ const HistoryPage: React.FC = () => {
               size="xl"
               icon={HeartIcon}
               iconPosition="left"
+              className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
             >
               Learn More About Us
             </Button>
@@ -260,6 +245,7 @@ const HistoryPage: React.FC = () => {
               size="xl"
               icon={CalendarIcon}
               iconPosition="left"
+              className="border-2 hover:bg-white hover:text-gray-900 transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
             >
               Reserve Your Date
             </Button>

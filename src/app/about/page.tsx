@@ -63,11 +63,6 @@ export default function About() {
         <div className="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-secondary-600/10"></div>
         <div className="absolute inset-0 bg-[url('/hero_bg.jpeg')] bg-cover bg-center opacity-5"></div>
         <div className="relative z-10 max-w-7xl mx-auto text-center">
-          <div className="flex justify-center mb-8">
-            <div className="w-24 h-24 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-3xl flex items-center justify-center shadow-2xl">
-              <HomeIcon className="w-12 h-12 text-white" />
-            </div>
-          </div>
           <h1 className="text-6xl md:text-7xl font-bold text-gray-900 mb-8 font-display">
             About <span className="gradient-text">Miller&apos;s Hill Farm</span>
           </h1>
@@ -83,7 +78,7 @@ export default function About() {
               size="xl"
               icon={HeartIcon}
               iconPosition="left"
-              className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
+              className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
             >
               Get in Touch
             </Button>
@@ -93,7 +88,7 @@ export default function About() {
               size="xl"
               icon={CalendarIcon}
               iconPosition="left"
-              className="border-2 hover:bg-primary-50 transform hover:-translate-y-1 transition-all duration-300"
+              className="border-2 hover:bg-primary-50 transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
             >
               Book Your Date
             </Button>
@@ -203,7 +198,7 @@ export default function About() {
                 size="xl"
                 icon={StarIcon}
                 iconPosition="left"
-                className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700"
+                className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
               >
                 Explore Our History
               </Button>
@@ -232,11 +227,8 @@ export default function About() {
               >
                 {/* Icon Header */}
                 <div className={`p-6 bg-gradient-to-br ${service.color} text-white`}>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-start mb-4">
                     <service.icon className="w-12 h-12 text-white" />
-                    <div className="text-sm font-medium bg-white/20 px-3 py-1 rounded-full">
-                      {index + 1} of 4
-                    </div>
                   </div>
                   <h3 className="text-2xl font-bold mb-2">{service.title}</h3>
                   <p className="text-white/90 text-sm leading-relaxed">{service.description}</p>
@@ -312,7 +304,7 @@ export default function About() {
               size="xl"
               icon={HeartIcon}
               iconPosition="left"
-              className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
+              className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
             >
               Get in Touch
             </Button>
@@ -322,7 +314,7 @@ export default function About() {
               size="xl"
               icon={CalendarIcon}
               iconPosition="left"
-              className="border-2 hover:bg-white hover:text-gray-900 transform hover:-translate-y-1 transition-all duration-300"
+              className="border-2 hover:bg-white hover:text-gray-900 transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
             >
               Reserve Your Date
             </Button>

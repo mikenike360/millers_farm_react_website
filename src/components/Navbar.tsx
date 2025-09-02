@@ -19,7 +19,7 @@ export default function Navbar() {
     <div 
       className={`navbar fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out py-0 ${
         isScrolled 
-          ? "bg-white/95 backdrop-blur-md shadow-soft border-b border-gray-200/50" 
+          ? "bg-gray-900/95 backdrop-blur-md shadow-soft border-b border-gray-700/50" 
           : "bg-gradient-to-r from-primary-600/95 to-secondary-600/95 backdrop-blur-md"
       }`}
     >
@@ -47,7 +47,7 @@ export default function Navbar() {
             {/* Enhanced Mobile Dropdown Menu */}
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 p-4 shadow-soft bg-white/95 backdrop-blur-md text-gray-800 rounded-2xl w-64 border border-gray-200/50"
+              className="menu menu-sm dropdown-content mt-3 p-4 shadow-soft bg-gray-900/95 backdrop-blur-md text-white rounded-2xl w-64 border border-gray-700/50"
             >
               {[
                 { href: "/", label: "Home" },
@@ -63,7 +63,7 @@ export default function Navbar() {
                 <li key={index}>
                   <Link 
                     href={item.href}
-                    className="py-3 px-4 rounded-xl hover:bg-primary-50 hover:text-primary-600 transition-all duration-300 font-medium"
+                    className="py-3 px-4 rounded-xl hover:bg-primary-600/20 hover:text-primary-400 transition-all duration-300 font-medium text-white"
                   >
                     {item.label}
                   </Link>

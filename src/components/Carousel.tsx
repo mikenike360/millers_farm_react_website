@@ -104,7 +104,7 @@ export default function Carousel() {
       {/* Custom CSS for better slider appearance */}
       <style jsx global>{`
         .testimonial-slider .slick-dots {
-          bottom: -40px;
+          bottom: -30px;
         }
         
         .testimonial-slider .slick-dots li button:before {

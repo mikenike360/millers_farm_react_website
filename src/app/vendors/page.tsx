@@ -122,11 +122,6 @@ const VendorsPage: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-secondary-600/10"></div>
         <div className="absolute inset-0 bg-[url('/hero_bg.jpeg')] bg-cover bg-center opacity-5"></div>
         <div className="relative z-10 max-w-7xl mx-auto text-center">
-          <div className="flex justify-center mb-8">
-            <div className="w-24 h-24 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-3xl flex items-center justify-center shadow-2xl">
-              <StarIcon className="w-12 h-12 text-white" />
-            </div>
-          </div>
           <h1 className="text-6xl md:text-7xl font-bold text-gray-900 mb-8 font-display">
             Recommended <span className="gradient-text">Vendors</span>
           </h1>
@@ -157,7 +152,7 @@ const VendorsPage: React.FC = () => {
               size="xl"
               icon={PhoneIcon}
               iconPosition="left"
-              className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
+              className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
             >
               Get Recommendations
             </Button>
@@ -167,7 +162,7 @@ const VendorsPage: React.FC = () => {
               size="xl"
               icon={HeartIcon}
               iconPosition="left"
-              className="border-2 hover:bg-primary-50 transform hover:-translate-y-1 transition-all duration-300"
+              className="border-2 hover:bg-primary-50 transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
             >
               Book Your Date
             </Button>
@@ -326,7 +321,7 @@ const VendorsPage: React.FC = () => {
               size="xl"
               icon={PhoneIcon}
               iconPosition="left"
-              className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
+              className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
             >
               Contact Us
             </Button>
@@ -336,7 +331,7 @@ const VendorsPage: React.FC = () => {
               size="xl"
               icon={CalendarIcon}
               iconPosition="left"
-              className="border-2 hover:bg-white hover:text-gray-900 transform hover:-translate-y-1 transition-all duration-300"
+              className="border-2 hover:bg-white hover:text-gray-900 transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
             >
               Book Your Date
             </Button>

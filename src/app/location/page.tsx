@@ -19,7 +19,7 @@ const LocationPage: React.FC = () => {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Miller's Farm Island Weddings",
+    "name": "Miller's Hill Farm",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "2206 Tuttle Lane",
@@ -96,12 +96,7 @@ const LocationPage: React.FC = () => {
         <section className="relative py-12 px-4 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-secondary-600/10"></div>
           <div className="relative z-10 max-w-7xl mx-auto text-center">
-            <div className="flex justify-center mb-6">
-              <div className="w-20 h-20 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center">
-                <MapPinIcon className="w-8 h-8 text-white" />
-              </div>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-display">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-display mt-8">
               Our <span className="gradient-text">Location</span>
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
@@ -131,7 +126,7 @@ const LocationPage: React.FC = () => {
                   size="md"
                   icon={info.icon}
                   iconColor={info.color}
-                  iconSize={16}
+                  iconSize={32}
                   className="text-center group hover:transform hover:-translate-y-2"
                 >
                   <h3 className="text-lg font-bold text-gray-900 mb-2">{info.title}</h3>
@@ -182,7 +177,7 @@ const LocationPage: React.FC = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 border-2 border-primary-600 text-primary-600 font-semibold rounded-lg hover:bg-primary-600 hover:text-white focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-300"
               >
-                <MapPinIcon className="w-6 h-6 mr-2" />
+                <MapPinIcon className="w-8 h-8 mr-2" />
                 Get Directions
               </a>
             </div>
@@ -209,7 +204,7 @@ const LocationPage: React.FC = () => {
                   size="lg"
                   icon={info.icon}
                   iconColor="text-primary-600"
-                  iconSize={16}
+                  iconSize={64}
                   className="group hover:transform hover:-translate-y-2"
                 >
                   <h3 className="text-lg font-bold text-gray-900 mb-3">{info.title}</h3>
@@ -236,7 +231,7 @@ const LocationPage: React.FC = () => {
         <section className="py-20 px-4 bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
           <div className="max-w-6xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 font-display">
-              About <span className="gradient-text">Lummi Island</span>
+              About <span className="gradient-text-white">Lummi Island</span>
             </h2>
             <p className="text-xl text-primary-100 max-w-4xl mx-auto leading-relaxed mb-8">
               Lummi Island is a hidden gem in the San Juan Islands, offering stunning natural beauty, 
@@ -278,6 +273,7 @@ const LocationPage: React.FC = () => {
                 size="xl"
                 icon={CalendarIcon}
                 iconPosition="left"
+                className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
               >
                 Schedule a Tour
               </Button>
@@ -287,6 +283,7 @@ const LocationPage: React.FC = () => {
                 size="xl"
                 icon={HeartIcon}
                 iconPosition="left"
+                className="border-2 hover:bg-white hover:text-gray-900 transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
               >
                 Get in Touch
               </Button>
