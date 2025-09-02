@@ -114,15 +114,31 @@ export default function About() {
       </section>
 
       {/* Owner & Venue Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-3xl mb-6 shadow-lg">
+              <HomeIcon className="w-10 h-10 text-white" />
+            </div>
+            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 font-display">
+              Our Family <span className="gradient-text">Legacy</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              A cherished, family-owned venue on Lummi Island since the 1940s, where history meets elegance, 
+              and every event becomes a treasured memory
+            </p>
+          </div>
+          
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Owner Info */}
             <div className="space-y-8">
-              <div className="text-center lg:text-left">
-                <h2 className="text-4xl font-bold text-gray-900 mb-6 font-display">
-                  Our Family <span className="gradient-text">Legacy</span>
-                </h2>
+              <div className="bg-white rounded-3xl p-8 shadow-soft border border-gray-100">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center">
+                    <HeartIcon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900">Barbara Miller</h3>
+                </div>
                 <p className="text-lg text-gray-600 leading-relaxed mb-6">
                   Miller&apos;s Farm has been a cherished, family-owned venue on Lummi Island since the 1940s. 
                   Founded by Jack Miller and now lovingly managed by owner Barbara Miller, our historic property 
@@ -152,6 +168,9 @@ export default function About() {
                     height={320}
                     className="relative w-80 h-80 object-cover rounded-full border-4 border-white shadow-soft transition-transform duration-300 group-hover:scale-105"
                   />
+                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-white rounded-full px-4 py-2 shadow-lg">
+                    <p className="text-sm font-semibold text-gray-900">Barbara Miller</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -166,6 +185,10 @@ export default function About() {
                 height={600}
                 className="relative w-full h-auto object-cover rounded-3xl shadow-soft transition-all duration-500 group-hover:scale-105 group-hover:shadow-xl"
               />
+              <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-lg">
+                <p className="text-sm font-semibold text-gray-900">Lummi Island, WA</p>
+                <p className="text-xs text-gray-600">San Juan Islands</p>
+              </div>
             </div>
           </div>
         </div>
