@@ -39,6 +39,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} ${inter.variable}`}
     >
       <head>
+        {/* Favicon Configuration */}
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        
         {/* Enhanced Meta Tags */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="theme-color" content="#3b82f6" />
@@ -247,6 +251,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://millershill.com",
+  },
+  icons: {
+    icon: "/favicon.ico"
   },
   category: "Wedding & Event Venue",
   classification: "Business",

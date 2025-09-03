@@ -179,11 +179,6 @@ const ServicesPage: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-secondary-600/10"></div>
         <div className="absolute inset-0 bg-[url('/hero_bg.jpeg')] bg-cover bg-center opacity-5"></div>
         <div className="relative z-10 max-w-7xl mx-auto text-center">
-          <div className="flex justify-center mb-8">
-            <div className="w-24 h-24 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-3xl flex items-center justify-center shadow-2xl">
-              <SparklesIcon className="w-12 h-12 text-white" />
-            </div>
-          </div>
           <h1 className="text-6xl md:text-7xl font-bold text-gray-900 mb-8 font-display">
             Our <span className="gradient-text">Services</span>
           </h1>

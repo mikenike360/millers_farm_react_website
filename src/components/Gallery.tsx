@@ -114,17 +114,17 @@ export default function MyLightboxGallery({ images = [] }: MyLightboxGalleryProp
   return (
     <div className="w-full">
       {/* Gallery Header */}
-      <div className="text-center mb-16">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl mb-6">
-          <FiSearch className="w-7 h-7 text-white" />
+      <div className="text-center mb-8 md:mb-16">
+        <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl mb-4 md:mb-6">
+          <FiSearch className="w-6 h-6 md:w-7 md:h-7 text-white" />
         </div>
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-display">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 md:mb-4 font-display">
           Photo <span className="gradient-text">Gallery</span>
         </h2>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
           Explore our stunning venue through the lens of beautiful moments captured here
         </p>
-        <div className="mt-6 text-sm text-gray-500">
+        <div className="mt-4 md:mt-6 text-xs md:text-sm text-gray-500">
           Click any image to view in full size • {images.length} photos available
         </div>
       </div>

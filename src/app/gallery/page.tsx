@@ -40,7 +40,7 @@ export default function GalleryPage() {
           
           // Create both thumbnail and full size URLs
           const fullUrl = urlData.publicUrl;
-          const thumbnailUrl = `${fullUrl}?width=200&height=200&resize=cover`;
+          const thumbnailUrl = `${fullUrl}?width=300&height=225&resize=cover`;
           
           return {
             thumbnail: thumbnailUrl,
@@ -148,7 +148,7 @@ export default function GalleryPage() {
       </section>
 
       {/* Main Gallery */}
-      <section className="py-20 px-4 bg-white">
+      <section className="py-12 md:py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <MyLightboxGallery images={images} />
         </div>

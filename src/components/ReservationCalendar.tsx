@@ -13,7 +13,7 @@ interface Booking {
 }
 
 interface ReservationCalendarProps {
-  onDateSelect?: (startDate: Date, endDate: Date) => void;
+  onDateSelect?: (startDate: Date | null, endDate: Date | null) => void;
   selectedStartDate?: Date | null;
   selectedEndDate?: Date | null;
 }
@@ -134,20 +134,48 @@ export default function ReservationCalendar({
     
     if (isDateBooked(date)) return; // Can't select booked dates
     
+    // Normalize the clicked date for comparison
+    const clickedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    
     if (!selectedStartDate) {
-      // First click - set start date only
+      // No selection exists - start a new selection
       onDateSelect?.(date, date);
-    } else if (selectedStartDate && !selectedEndDate) {
-      // Second click - set end date to complete the range
-      if (date >= selectedStartDate) {
-        onDateSelect?.(selectedStartDate, date);
+    } else if (!selectedEndDate) {
+      // Only start date exists
+      const startDate = new Date(selectedStartDate.getFullYear(), selectedStartDate.getMonth(), selectedStartDate.getDate());
+      
+      if (clickedDate.getTime() === startDate.getTime()) {
+        // Clicked the same date as start - remove selection
+        onDateSelect?.(null, null);
       } else {
-        // If second date is before first, swap them
-        onDateSelect?.(date, selectedStartDate);
+        // Clicked different date - set as end date
+        if (clickedDate > startDate) {
+          onDateSelect?.(selectedStartDate, date);
+        } else {
+          onDateSelect?.(date, selectedStartDate);
+        }
       }
     } else {
-      // Third click (or more) - start new selection
-      onDateSelect?.(date, date);
+      // Both start and end dates exist
+      const startDate = new Date(selectedStartDate.getFullYear(), selectedStartDate.getMonth(), selectedStartDate.getDate());
+      const endDate = new Date(selectedEndDate.getFullYear(), selectedEndDate.getMonth(), selectedEndDate.getDate());
+      
+      if (clickedDate.getTime() === startDate.getTime()) {
+        // Clicked start date - remove entire selection
+        onDateSelect?.(null, null);
+      } else if (clickedDate.getTime() === endDate.getTime()) {
+        // Clicked end date - remove entire selection
+        onDateSelect?.(null, null);
+      } else if (clickedDate > startDate && clickedDate < endDate) {
+        // Clicked inside range - shorten end date to clicked date
+        onDateSelect?.(selectedStartDate, date);
+      } else if (clickedDate < startDate) {
+        // Clicked before start - extend range backward
+        onDateSelect?.(date, selectedEndDate);
+      } else if (clickedDate > endDate) {
+        // Clicked after end - extend range forward
+        onDateSelect?.(selectedStartDate, date);
+      }
     }
   };
 
@@ -169,50 +197,74 @@ export default function ReservationCalendar({
   const days = getDaysInMonth(currentMonth);
 
   return (
-    <div className="bg-white rounded-2xl shadow-soft p-6">
+    <div className="bg-white rounded-2xl shadow-soft p-4 md:p-6">
       {/* Calendar Header */}
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-xl font-bold text-gray-900">Availability Calendar</h3>
-        <div className="flex items-center space-x-2">
+      <div className="flex flex-col md:flex-row items-center justify-between mb-6 space-y-4 md:space-y-0">
+        <h3 className="text-lg md:text-xl font-bold text-gray-900">Availability Calendar</h3>
+        <div className="flex items-center space-x-2 md:space-x-4">
           <button
             onClick={previousMonth}
             className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
           >
-            <CalendarIcon className="w-5 h-5 text-gray-600" />
+            <CalendarIcon className="w-4 h-4 md:w-5 md:h-5 text-gray-600" />
           </button>
-          <span className="text-lg font-semibold text-gray-800 min-w-[120px] text-center">
-            {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
-          </span>
+          
+          <div className="flex items-center space-x-1 md:space-x-2">
+            <select
+              value={currentMonth.getMonth()}
+              onChange={(e) => setCurrentMonth(new Date(currentMonth.getFullYear(), parseInt(e.target.value), 1))}
+              className="px-2 md:px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors text-sm"
+            >
+              {monthNames.map((month, index) => (
+                <option key={month} value={index}>
+                  {month}
+                </option>
+              ))}
+            </select>
+            
+            <select
+              value={currentMonth.getFullYear()}
+              onChange={(e) => setCurrentMonth(new Date(parseInt(e.target.value), currentMonth.getMonth(), 1))}
+              className="px-2 md:px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors text-sm"
+            >
+              {Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - 2 + i).map(year => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          </div>
+          
           <button
             onClick={nextMonth}
             className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
           >
-            <CalendarIcon className="w-5 h-5 text-gray-600" />
+            <CalendarIcon className="w-4 h-4 md:w-5 md:h-5 text-gray-600" />
           </button>
         </div>
       </div>
 
       {/* Legend */}
-      <div className="flex items-center justify-center space-x-6 mb-4 text-sm">
-        <div className="flex items-center space-x-2">
-          <div className="w-5 h-5 bg-white border-2 border-gray-300 rounded"></div>
-          <span className="text-sm text-gray-600">Available</span>
+      <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 mb-4 text-xs md:text-sm">
+        <div className="flex items-center space-x-1 md:space-x-2">
+          <div className="w-4 h-4 md:w-5 md:h-5 bg-white border-2 border-gray-300 rounded"></div>
+          <span className="text-xs md:text-sm text-gray-600">Available</span>
         </div>
-        <div className="flex items-center space-x-2">
-          <div className="w-5 h-5 bg-red-100 border-2 border-red-300 rounded"></div>
-          <span className="text-sm text-gray-600">Booked</span>
+        <div className="flex items-center space-x-1 md:space-x-2">
+          <div className="w-4 h-4 md:w-5 md:h-5 bg-red-100 border-2 border-red-300 rounded"></div>
+          <span className="text-xs md:text-sm text-gray-600">Booked</span>
         </div>
-        <div className="flex items-center space-x-2">
-          <div className="w-5 h-5 bg-blue-500 border-2 border-blue-600 rounded"></div>
-          <span className="text-sm text-gray-600">Selected</span>
+        <div className="flex items-center space-x-1 md:space-x-2">
+          <div className="w-4 h-4 md:w-5 md:h-5 bg-blue-500 border-2 border-blue-600 rounded"></div>
+          <span className="text-xs md:text-sm text-gray-600">Selected</span>
         </div>
-        <div className="flex items-center space-x-2">
-          <div className="w-5 h-5 bg-blue-100 border-2 border-blue-200 rounded"></div>
-          <span className="text-sm text-gray-600">In Range</span>
+        <div className="flex items-center space-x-1 md:space-x-2">
+          <div className="w-4 h-4 md:w-5 md:h-5 bg-blue-100 border-2 border-blue-200 rounded"></div>
+          <span className="text-xs md:text-sm text-gray-600">In Range</span>
         </div>
-        <div className="flex items-center space-x-2">
-          <div className="w-5 h-5 bg-yellow-100 border-2 border-yellow-300 rounded"></div>
-          <span className="text-sm text-gray-600">Confirmed</span>
+        <div className="flex items-center space-x-1 md:space-x-2">
+          <div className="w-4 h-4 md:w-5 md:h-5 bg-yellow-100 border-2 border-yellow-300 rounded"></div>
+          <span className="text-xs md:text-sm text-gray-600">Confirmed</span>
         </div>
       </div>
 
@@ -228,7 +280,6 @@ export default function ReservationCalendar({
         {/* Calendar Days */}
         {days.map((date, index) => {
           const isCurrentMonth = date.getMonth() === currentMonth.getMonth();
-          const isToday = date.toDateString() === new Date().toDateString();
           const isPast = date < new Date(new Date().setHours(0, 0, 0, 0));
           const isBooked = isDateBooked(date);
           const isConfirmed = isDateConfirmed(date);
@@ -283,9 +334,8 @@ export default function ReservationCalendar({
               className={`
                 p-3 text-sm font-medium rounded-lg border-2 transition-all duration-200
                 ${bgColor} ${borderColor} ${textColor}
-                ${isCurrentMonth && !isPast ? 'hover:bg-gray-50' : ''}
+                ${isCurrentMonth && !isPast && !isBooked && !isSelected && !isStartDate && !isEndDate ? 'hover:bg-gray-50 hover:border-gray-300' : ''}
                 ${isBooked || isPast ? 'cursor-not-allowed opacity-75' : 'cursor-pointer hover:shadow-md'}
-                ${isToday ? 'ring-2 ring-primary-500 ring-offset-2' : ''}
                 ${isStartDate || isEndDate ? 'font-bold' : ''}
               `}
             >
@@ -312,9 +362,9 @@ export default function ReservationCalendar({
           {!selectedStartDate ? (
             <p>Click a date to select your start date</p>
           ) : !selectedEndDate ? (
-            <p>Now click another date to select your end date</p>
+            <p>Click another date to select your end date, or click the same date to cancel</p>
           ) : (
-            <p>Date range selected! Click any date to start over</p>
+            <p>Date range selected! Click start/end dates to cancel, or click other dates to adjust range</p>
           )}
           <p className="mt-1">Blue dates are selected, blue range shows your selection</p>
         </div>

@@ -32,7 +32,7 @@ function ReservationContent() {
   const initialEndDate = urlEndDate ? new Date(urlEndDate) : null;
 
   // Extract eventType from URL
-  const urlEventType = searchParams.get("eventType") || "Wedding";
+  const urlEventType = searchParams.get("eventType") || "Tour";
   const [eventType, setEventType] = useState<string>(urlEventType);
 
   const [bookings, setBookings] = useState<BookingEvent[]>([]);
@@ -65,12 +65,12 @@ function ReservationContent() {
   }, []);
 
   const goToStep2 = () => {
-    if (!startDate || !endDate) {
-      setAlertMessage("Please enter both a start and end date before continuing.");
+    if (!startDate) {
+      setAlertMessage("Please enter a start date before continuing.");
       return;
     }
 
-    // Check if dates are in the past
+    // Check if date is in the past
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Set to start of day for accurate comparison
     
@@ -78,10 +78,10 @@ function ReservationContent() {
       setAlertMessage("Start date cannot be in the past. Please select a future date.");
       return;
     }
-    
-    if (endDate < today) {
-      setAlertMessage("End date cannot be in the past. Please select a future date.");
-      return;
+
+    // For one-day events, set end date to same as start date
+    if (!endDate) {
+      setEndDate(startDate);
     }
 
     setStep(2);
@@ -148,13 +148,13 @@ function ReservationContent() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-50 to-white pt-20">
       {/* Hero Section */}
-      <section className="relative py-16 px-4 overflow-hidden">
+      <section className="relative py-12 md:py-16 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-secondary-600/10"></div>
         <div className="relative z-10 max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 font-display">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6 font-display">
             Reserve Your <span className="gradient-text">Date</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Secure your perfect date at Miller&apos;s Hill Farm for your special event
           </p>
         </div>
@@ -164,22 +164,22 @@ function ReservationContent() {
       <section className="py-8 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-center mb-8">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 md:space-x-4">
               {steps.map((stepItem, index) => (
                 <div key={stepItem.number} className="flex items-center">
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+                  <div className={`w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
                     step >= stepItem.number 
                       ? 'bg-primary-600 border-primary-600 text-white' 
                       : 'bg-white border-gray-300 text-gray-400'
                   }`}>
                     {step > stepItem.number ? (
-                      <CheckCircleIcon className="w-6 h-6" />
+                      <CheckCircleIcon className="w-4 h-4 md:w-6 md:h-6" />
                     ) : (
-                      <stepItem.icon className="w-6 h-6" />
+                      <stepItem.icon className="w-4 h-4 md:w-6 md:h-6" />
                     )}
                   </div>
                   {index < steps.length - 1 && (
-                    <div className={`w-16 h-1 transition-all duration-300 ${
+                    <div className={`w-8 md:w-16 h-1 transition-all duration-300 ${
                       step > stepItem.number ? 'bg-primary-600' : 'bg-gray-300'
                     }`}></div>
                   )}
@@ -189,7 +189,7 @@ function ReservationContent() {
           </div>
           
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-gray-900">
+            <h2 className="text-xl md:text-2xl font-bold text-gray-900">
               Step {step}: {steps[step - 1].title}
             </h2>
           </div>
@@ -199,20 +199,20 @@ function ReservationContent() {
       {/* Reservation Form */}
       <section className="py-8 px-4">
         <div className="max-w-4xl mx-auto">
-          <Card variant="elevated" size="xl" className="p-8" overflow="visible" hover={false}>
+          <Card variant="elevated" size="xl" className="p-4 md:p-8" overflow="visible" hover={false}>
             {alertMessage && (
               <AlertModal message={alertMessage} onClose={() => setAlertMessage(null)} />
             )}
 
             {/* Step 1: Date Selection */}
             {step === 1 && (
-              <div className="space-y-8">
+              <div className="space-y-6 md:space-y-8">
                 <div className="text-center">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                    Select Your Event Dates
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+                    Select Your Event Date
                   </h3>
-                  <p className="text-gray-600">
-                    Choose the perfect dates for your special event
+                  <p className="text-gray-600 text-sm md:text-base">
+                    Choose the perfect date for your special event
                   </p>
                 </div>
 
@@ -220,15 +220,8 @@ function ReservationContent() {
                 <div className="mb-8">
                   <ReservationCalendar
                     onDateSelect={(start, end) => {
-                      // If start and end are the same, this is the first selection
-                      if (start.getTime() === end.getTime()) {
-                        setStartDate(start);
-                        setEndDate(null); // Clear end date for first selection
-                      } else {
-                        // This is the second selection, set both dates
-                        setStartDate(start);
-                        setEndDate(end);
-                      }
+                      setStartDate(start);
+                      setEndDate(end);
                     }}
                     selectedStartDate={startDate}
                     selectedEndDate={endDate}
@@ -236,21 +229,21 @@ function ReservationContent() {
                 </div>
 
                 <div className="text-center">
-                  <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                    Or manually select your dates below
+                  <h4 className="text-base md:text-lg font-semibold text-gray-900 mb-4">
+                    Or manually select your date below
                   </h4>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div className="space-y-3">
                     <label className="block font-semibold text-gray-900">
-                      Start Date
+                      Event Date
                     </label>
                     <DatePicker
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
-                      placeholderText="Select start date"
+                      placeholderText="Select event date"
                       dateFormat="MMMM d, yyyy"
                       popperClassName="z-50"
                       popperPlacement="bottom-start"
@@ -260,13 +253,13 @@ function ReservationContent() {
 
                   <div className="space-y-3">
                     <label className="block font-semibold text-gray-900">
-                      End Date
+                      End Date (Optional)
                     </label>
                     <DatePicker
                       selected={endDate}
                       onChange={(date) => setEndDate(date)}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
-                      placeholderText="Select end date"
+                      placeholderText="Select end date (optional)"
                       dateFormat="MMMM d, yyyy"
                       popperClassName="z-50"
                       popperPlacement="bottom-start"
@@ -283,6 +276,7 @@ function ReservationContent() {
                       value={eventType}
                       onChange={(e) => setEventType(e.target.value)}
                     >
+                      <option value="Tour">Tour</option>
                       <option value="Wedding">Wedding</option>
                       <option value="Engagement Party">Engagement Party</option>
                       <option value="Birthday Party">Birthday Party</option>
@@ -294,6 +288,7 @@ function ReservationContent() {
                       <option value="Fundraiser">Fundraiser</option>
                       <option value="Private Dinner">Private Dinner</option>
                       <option value="Food Tasting">Food Tasting</option>
+                      <option value="Wine Tasting">Wine Tasting</option>
                       <option value="Art Exhibition">Art Exhibition</option>
                       <option value="Other">Other</option>
                     </select>
@@ -307,6 +302,7 @@ function ReservationContent() {
                     size="lg"
                     icon={ArrowRightIcon}
                     iconPosition="right"
+                    className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
                   >
                     Next: Your Information
                   </Button>
@@ -316,17 +312,17 @@ function ReservationContent() {
 
             {/* Step 2: User Information */}
             {step === 2 && (
-              <div className="space-y-8">
+              <div className="space-y-6 md:space-y-8">
                 <div className="text-center">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
                     Your Information
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 text-sm md:text-base">
                     Please provide your contact details
                   </p>
                 </div>
                 
-                <div className="space-y-6">
+                <div className="space-y-4 md:space-y-6">
                   <div>
                     <label className="block font-semibold text-gray-900 mb-2">
                       Full Name
@@ -387,6 +383,7 @@ function ReservationContent() {
                     size="lg"
                     icon={ArrowLeftIcon}
                     iconPosition="left"
+                    className="border-2 hover:bg-white hover:text-gray-900 transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
                   >
                     Back
                   </Button>
@@ -396,6 +393,7 @@ function ReservationContent() {
                     size="lg"
                     icon={ArrowRightIcon}
                     iconPosition="right"
+                    className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
                   >
                     Next: Confirm
                   </Button>
@@ -405,17 +403,17 @@ function ReservationContent() {
 
             {/* Step 3: Confirmation */}
             {step === 3 && (
-              <div className="space-y-8">
+              <div className="space-y-6 md:space-y-8">
                 <div className="text-center">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
                     Confirm Your Reservation
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 text-sm md:text-base">
                     Please review your details before submitting
                   </p>
                 </div>
                 
-                <div className="bg-gray-50 rounded-2xl p-6 space-y-4">
+                <div className="bg-gray-50 rounded-2xl p-4 md:p-6 space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <span className="font-semibold text-gray-900">Reservation Dates:</span>
@@ -453,6 +451,7 @@ function ReservationContent() {
                     size="lg"
                     icon={ArrowLeftIcon}
                     iconPosition="left"
+                    className="border-2 hover:bg-white hover:text-gray-900 transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
                   >
                     Back
                   </Button>
@@ -462,7 +461,7 @@ function ReservationContent() {
                     size="lg"
                     icon={CheckCircleIcon}
                     iconPosition="left"
-                    className="bg-green-600 hover:bg-green-700"
+                    className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
                   >
                     Confirm & Submit
                   </Button>

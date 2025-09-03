@@ -70,8 +70,12 @@ const LocationPage: React.FC = () => {
     {
               icon: GlobeAltIcon,
       title: "Ferry Access",
-      description: "Take the Lummi Island ferry from Gooseberry Point (Bellingham) to Lummi Island. The ferry runs every 20-30 minutes and takes about 10 minutes.",
-      tips: ["Check ferry schedule in advance", "Arrive 15 minutes early", "Vehicle reservations recommended"]
+      description: "Take the Lummi Island ferry from Gooseberry Point (Bellingham) to Lummi Island. The ferry runs every hour and takes about 10 minutes.",
+      tips: ["Check ferry schedule in advance", "Arrive 15 minutes early"],
+      link: {
+        url: "https://whatcomchief.com/",
+        text: "Check live ferry wait times"
+      }
     },
     {
               icon: TruckIcon,
@@ -96,7 +100,7 @@ const LocationPage: React.FC = () => {
         <section className="relative py-12 px-4 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-secondary-600/10"></div>
           <div className="relative z-10 max-w-7xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-display mt-8">
+            <h1 className="text-6xl md:text-7xl font-bold text-gray-900 mb-8 font-display mt-8">
               Our <span className="gradient-text">Location</span>
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
@@ -221,6 +225,22 @@ const LocationPage: React.FC = () => {
                       ))}
                     </ul>
                   </div>
+                  
+                  {info.link && (
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <a
+                        href={info.link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors duration-300"
+                      >
+                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                        {info.link.text}
+                      </a>
+                    </div>
+                  )}
                 </Card>
               ))}
             </div>

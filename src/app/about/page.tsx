@@ -268,6 +268,20 @@ export default function About() {
               </div>
             ))}
           </div>
+          
+          {/* Services Button */}
+          <div className="text-center mt-12">
+            <Button
+              href="/services"
+              variant="gradient"
+              size="xl"
+              icon={SparklesIcon}
+              iconPosition="left"
+              className="shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 min-w-[220px] text-sm [&>svg]:w-5 [&>svg]:h-5"
+            >
+              View All Services
+            </Button>
+          </div>
         </div>
       </section>
 
