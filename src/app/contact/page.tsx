@@ -22,8 +22,8 @@ export default function Contact() {
     {
       icon: EnvelopeIcon,
       title: "Email",
-      value: "info@millersfarmislandweddings.com",
-      href: "mailto:info@millersfarmislandweddings.com",
+      value: "info@millershill.com",
+      href: "mailto:info@millershill.com",
       color: "text-secondary-600"
     },
     {

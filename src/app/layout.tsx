@@ -5,6 +5,7 @@ import "./styles/globals.css";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Metadata } from "next";
 
 // Load fonts
@@ -53,6 +54,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow" />
         <meta name="bingbot" content="index, follow" />
+        <meta name="author" content="Miller's Hill Farm" />
+        <meta name="copyright" content="Miller's Hill Farm" />
+        <meta name="coverage" content="Worldwide" />
+        <meta name="distribution" content="Global" />
+        <meta name="rating" content="General" />
+        <meta name="revisit-after" content="7 days" />
+        <meta name="language" content="English" />
+        <meta name="geo.region" content="US-WA" />
+        <meta name="geo.placename" content="Lummi Island" />
+        <meta name="geo.position" content="48.72159088961969;-122.69856615392804" />
+        <meta name="ICBM" content="48.72159088961969, -122.69856615392804" />
         
         {/* Local Business Schema */}
         <script
@@ -64,9 +76,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "name": "Miller's Hill Farm",
               "alternateName": "Miller's Hill Farm Wedding Venue",
               "image": [
-                "https://millersfarmislandweddings.com/og.jpg",
-                "https://millersfarmislandweddings.com/hero_bg.jpeg",
-                "https://millersfarmislandweddings.com/millers_hill_farm_nighttime.jpg"
+                        "https://millershill.com/og.jpg",
+        "https://millershill.com/hero_bg.jpeg",
+        "https://millershill.com/millers_hill_farm_nighttime.jpg"
               ],
               "telephone": "1-360-739-9262",
               "email": "info@millershill.com",
@@ -78,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 "postalCode": "98262",
                 "addressCountry": "US"
               },
-              "url": "https://millersfarmislandweddings.com",
+              "url": "https://millershill.com",
               "description": "Miller's Hill Farm is a premier wedding and event venue on Lummi Island in Washington state, featuring a converted barn, expansive lawn, and scenic water views of the San Juan Islands.",
               "geo": {
                 "@type": "GeoCoordinates",
@@ -137,8 +149,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@context": "https://schema.org",
               "@type": "Organization",
               "name": "Miller's Hill Farm",
-              "url": "https://millersfarmislandweddings.com",
-              "logo": "https://millersfarmislandweddings.com/logo.png",
+              "url": "https://millershill.com",
+              "logo": "https://millershill.com/logo.png",
               "contactPoint": {
                 "@type": "ContactPoint",
                 "telephone": "1-360-739-9262",
@@ -166,18 +178,38 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@context": "https://schema.org",
               "@type": "WebSite",
               "name": "Miller's Hill Farm",
-              "url": "https://millersfarmislandweddings.com",
+              "url": "https://millershill.com",
               "description": "Premier wedding and event venue on Lummi Island, Washington",
               "potentialAction": {
                 "@type": "SearchAction",
-                "target": "https://millersfarmislandweddings.com/search?q={search_term_string}",
+                "target": "https://millershill.com/search?q={search_term_string}",
                 "query-input": "required name=search_term_string"
               }
             }),
           }}
         />
+        
+        {/* BreadcrumbList Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://millershill.com"
+                }
+              ]
+            }),
+          }}
+        />
       </head>
       <body className="font-sans antialiased">
+        <GoogleAnalytics GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ''} />
         <Navbar />
         <main className="pt-16">{children}</main>
         <Footer />
@@ -247,7 +279,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "your-google-verification-code", // Add your Google verification code
+    google: process.env.GOOGLE_VERIFICATION_CODE || "your-google-verification-code", // Add your Google verification code
   },
   alternates: {
     canonical: "https://millershill.com",

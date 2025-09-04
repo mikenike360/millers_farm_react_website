@@ -33,7 +33,7 @@ const LocationPage: React.FC = () => {
       "latitude": "48.72159088961969",
       "longitude": "-122.69856615392804"
     },
-    "url": "https://millersfarmislandweddings.com/location",
+            "url": "https://millershill.com/location",
     "telephone": "+1-360-739-9262"
   };
 
@@ -54,8 +54,8 @@ const LocationPage: React.FC = () => {
     {
       icon: EnvelopeIcon,
       title: "Email",
-      value: "info@millersfarmislandweddings.com",
-      href: "mailto:info@millersfarmislandweddings.com",
+      value: "info@millershill.com",
+      href: "mailto:info@millershill.com",
       color: "text-accent-600"
     },
     {
