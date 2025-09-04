@@ -135,7 +135,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               },
               "sameAs": [
                 "https://www.facebook.com/millershillfarm",
-                "https://www.instagram.com/millershillfarm"
+                "https://www.instagram.com/millershillfarmvenue"
               ]
             }),
           }}

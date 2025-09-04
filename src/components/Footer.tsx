@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FaFacebookF, FaTwitter, FaInstagram, FaPhone, FaEnvelope, FaMapMarkerAlt, FaHeart } from "react-icons/fa";
+import { FaInstagram, FaPhone, FaEnvelope, FaMapMarkerAlt, FaHeart } from "react-icons/fa";
 import Image from "next/image";
 
 export default function Footer() {
@@ -36,23 +36,7 @@ export default function Footer() {
               </p>
               <div className="flex space-x-4">
                 <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-primary-500 hover:scale-110 transition-all duration-300 border border-white/20"
-                >
-                  <FaFacebookF className="text-white" />
-                </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-primary-500 hover:scale-110 transition-all duration-300 border border-white/20"
-                >
-                  <FaTwitter className="text-white" />
-                </a>
-                <a
-                  href="https://instagram.com"
+                  href="https://instagram.com/millershillfarmvenue"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-primary-500 hover:scale-110 transition-all duration-300 border border-white/20"
