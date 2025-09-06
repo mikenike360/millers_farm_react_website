@@ -789,84 +789,142 @@ export default function AdminPanel() {
                     <p className="text-gray-400">Confirmed bookings will appear here</p>
                   </div>
                 ) : (
-                  <div className="overflow-x-auto">
-                    <table className="w-full">
-                      <thead className="bg-gray-50">
-                        <tr>
-                          <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest</th>
-                          <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Event Details</th>
-                          <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
-                          <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Notes</th>
-                          <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody className="bg-white divide-y divide-gray-200">
-                        {confirmedBookings.map((booking) => (
-                          <tr key={booking.id} className="hover:bg-gray-50 transition-colors">
-                            <td className="px-6 py-4">
-                              <div className="flex items-center">
-                                <div className="p-2 bg-green-100 rounded-full">
-                                  <UserIcon className="w-6 h-6 text-green-600" />
-                                </div>
-                                <div className="ml-3">
-                                  <p className="text-sm font-medium text-gray-900">{booking.name}</p>
-                                  {booking.eventType && (
-                                    <p className="text-xs text-gray-500">{booking.eventType}</p>
-                                  )}
-                                </div>
-                              </div>
-                            </td>
-                            <td className="px-6 py-4">
-                              <div className="flex items-center">
-                                <CalendarIcon className="w-6 h-6 text-gray-400 mr-2" />
-                                <div>
-                                  <p className="text-sm text-gray-900">
-                                    {new Date(booking.start_date).toLocaleDateString()} - {new Date(booking.end_date).toLocaleDateString()}
-                                  </p>
-                                  <p className="text-xs text-gray-500">
-                                    {Math.ceil((new Date(booking.end_date).getTime() - new Date(booking.start_date).getTime()) / (1000 * 60 * 60 * 24))} days
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
-                            <td className="px-6 py-4">
-                              <div className="space-y-1">
-                                <div className="flex items-center text-sm text-gray-900">
-                                  <EnvelopeIcon className="w-6 h-6 text-gray-400 mr-2" />
-                                  {booking.email}
-                                </div>
-                                <div className="flex items-center text-sm text-gray-900">
-                                  <PhoneIcon className="w-6 h-6 text-gray-400 mr-2" />
-                                  {booking.phone}
-                                </div>
-                              </div>
-                            </td>
-                            <td className="px-6 py-4">
-                              {booking.notes ? (
-                                <div className="flex items-start">
-                                  <DocumentTextIcon className="w-6 h-6 text-gray-400 mr-2 mt-0.5" />
-                                  <p className="text-sm text-gray-900 max-w-xs truncate" title={booking.notes}>
-                                    {booking.notes}
-                                  </p>
-                                </div>
-                              ) : (
-                                <span className="text-gray-400 text-sm">No notes</span>
-                              )}
-                            </td>
-                            <td className="px-6 py-4">
-                              <button
-                                onClick={() => showDeleteConfirmation(booking.id, booking.name)}
-                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
-                              >
-                                <TrashIcon className="w-6 h-6 mr-1" />
-                                Delete
-                              </button>
-                            </td>
+                  <>
+                    {/* Desktop Table View */}
+                    <div className="hidden lg:block overflow-x-auto">
+                      <table className="w-full">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest</th>
+                            <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Event Details</th>
+                            <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
+                            <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Notes</th>
+                            <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                          {confirmedBookings.map((booking) => (
+                            <tr key={booking.id} className="hover:bg-gray-50 transition-colors">
+                              <td className="px-6 py-4">
+                                <div className="flex items-center">
+                                  <div className="p-2 bg-green-100 rounded-full">
+                                    <UserIcon className="w-6 h-6 text-green-600" />
+                                  </div>
+                                  <div className="ml-3">
+                                    <p className="text-sm font-medium text-gray-900">{booking.name}</p>
+                                    {booking.eventType && (
+                                      <p className="text-xs text-gray-500">{booking.eventType}</p>
+                                    )}
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="px-6 py-4">
+                                <div className="flex items-center">
+                                  <CalendarIcon className="w-6 h-6 text-gray-400 mr-2" />
+                                  <div>
+                                    <p className="text-sm text-gray-900">
+                                      {new Date(booking.start_date).toLocaleDateString()} - {new Date(booking.end_date).toLocaleDateString()}
+                                    </p>
+                                    <p className="text-xs text-gray-500">
+                                      {Math.ceil((new Date(booking.end_date).getTime() - new Date(booking.start_date).getTime()) / (1000 * 60 * 60 * 24))} days
+                                    </p>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="px-6 py-4">
+                                <div className="space-y-1">
+                                  <div className="flex items-center text-sm text-gray-900">
+                                    <EnvelopeIcon className="w-6 h-6 text-gray-400 mr-2" />
+                                    {booking.email}
+                                  </div>
+                                  <div className="flex items-center text-sm text-gray-900">
+                                    <PhoneIcon className="w-6 h-6 text-gray-400 mr-2" />
+                                    {booking.phone}
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="px-6 py-4">
+                                {booking.notes ? (
+                                  <div className="flex items-start">
+                                    <DocumentTextIcon className="w-6 h-6 text-gray-400 mr-2 mt-0.5" />
+                                    <p className="text-sm text-gray-900 max-w-xs truncate" title={booking.notes}>
+                                      {booking.notes}
+                                    </p>
+                                  </div>
+                                ) : (
+                                  <span className="text-gray-400 text-sm">No notes</span>
+                                )}
+                              </td>
+                              <td className="px-6 py-4">
+                                <button
+                                  onClick={() => showDeleteConfirmation(booking.id, booking.name)}
+                                  className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
+                                >
+                                  <TrashIcon className="w-6 h-6 mr-1" />
+                                  Delete
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* Mobile Card View */}
+                    <div className="lg:hidden space-y-4">
+                      {confirmedBookings.map((booking) => (
+                        <div key={booking.id} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex items-center">
+                              <div className="p-2 bg-green-100 rounded-full">
+                                <UserIcon className="w-6 h-6 text-green-600" />
+                              </div>
+                              <div className="ml-3">
+                                <p className="text-sm font-medium text-gray-900">{booking.name}</p>
+                                {booking.eventType && (
+                                  <p className="text-xs text-gray-500">{booking.eventType}</p>
+                                )}
+                              </div>
+                            </div>
+                            <button
+                              onClick={() => showDeleteConfirmation(booking.id, booking.name)}
+                              className="p-2 bg-red-100 rounded-full hover:bg-red-200 transition-colors"
+                            >
+                              <TrashIcon className="w-5 h-5 text-red-600" />
+                            </button>
+                          </div>
+                          
+                          <div className="space-y-2 text-sm">
+                            <div className="flex items-center">
+                              <CalendarIcon className="w-5 h-5 text-gray-400 mr-2" />
+                              <span className="text-gray-900">
+                                {new Date(booking.start_date).toLocaleDateString()} - {new Date(booking.end_date).toLocaleDateString()}
+                              </span>
+                            </div>
+                            
+                            {booking.email && (
+                              <div className="flex items-center">
+                                <EnvelopeIcon className="w-5 h-5 text-gray-400 mr-2" />
+                                <span className="text-gray-900">{booking.email}</span>
+                              </div>
+                            )}
+                            
+                            <div className="flex items-center">
+                              <PhoneIcon className="w-5 h-5 text-gray-400 mr-2" />
+                              <span className="text-gray-900">{booking.phone}</span>
+                            </div>
+                            
+                            {booking.notes && (
+                              <div className="flex items-start">
+                                <DocumentTextIcon className="w-5 h-5 text-gray-400 mr-2 mt-0.5" />
+                                <span className="text-gray-900 text-xs">{booking.notes}</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </>
                 )}
               </div>
             </>
@@ -885,39 +943,39 @@ export default function AdminPanel() {
                   </p>
                 </div>
 
-                <div className="bg-white rounded-xl shadow-lg p-8">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="bg-white rounded-xl shadow-lg p-4 md:p-8">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
                     {/* Calendar Section */}
                     <div>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-4">Select Dates</h3>
-                      <div className="bg-gray-50 rounded-lg p-4">
-                        <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">Select Dates</h3>
+                      <div className="bg-gray-50 rounded-lg p-3 md:p-4">
+                        <div className="flex items-center justify-between mb-3 md:mb-4">
                           <button
                             onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1))}
-                            className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
+                            className="p-1.5 md:p-2 hover:bg-gray-200 rounded-lg transition-colors"
                           >
-                            <ChevronLeftIcon className="w-6 h-6" />
+                            <ChevronLeftIcon className="w-5 h-5 md:w-6 md:h-6" />
                           </button>
-                          <h4 className="text-lg font-semibold text-gray-900">
+                          <h4 className="text-base md:text-lg font-semibold text-gray-900">
                             {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                           </h4>
                           <button
                             onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))}
-                            className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
+                            className="p-1.5 md:p-2 hover:bg-gray-200 rounded-lg transition-colors"
                           >
-                            <ChevronRightIcon className="w-6 h-6" />
+                            <ChevronRightIcon className="w-5 h-5 md:w-6 md:h-6" />
                           </button>
                         </div>
                         
-                        <div className="grid grid-cols-7 gap-1 mb-4">
+                        <div className="grid grid-cols-7 gap-0.5 md:gap-1 mb-3 md:mb-4">
                           {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                            <div key={day} className="text-center text-sm font-medium text-gray-500 py-2">
-                              {day}
+                            <div key={day} className="text-center text-xs md:text-sm font-medium text-gray-500 py-1 md:py-2">
+                              {day.slice(0, 3)}
                             </div>
                           ))}
                         </div>
                         
-                        <div className="grid grid-cols-7 gap-1">
+                        <div className="grid grid-cols-7 gap-0.5 md:gap-1">
                           {getDaysInMonth(currentMonth).map((date, index) => {
                             const isCurrentMonth = date.getMonth() === currentMonth.getMonth();
                             const isToday = date.toDateString() === new Date().toDateString();
@@ -967,11 +1025,11 @@ export default function AdminPanel() {
                                 onClick={() => handleManualDateClick(date)}
                                 disabled={isBooked || isPast}
                                 className={`
-                                  p-2 text-sm font-medium rounded-lg border-2 transition-all duration-200
+                                  p-1 md:p-2 text-xs md:text-sm font-medium rounded-md md:rounded-lg border transition-all duration-200
                                   ${bgColor} ${borderColor} ${textColor}
                                   ${isCurrentMonth && !isPast ? 'hover:bg-gray-50' : ''}
                                   ${isBooked || isPast ? 'cursor-not-allowed opacity-75' : 'cursor-pointer hover:shadow-md'}
-                                  ${isToday ? 'ring-2 ring-primary-500 ring-offset-2' : ''}
+                                  ${isToday ? 'ring-1 md:ring-2 ring-primary-500 ring-offset-1 md:ring-offset-2' : ''}
                                   ${isStartDate || isEndDate ? 'font-bold' : ''}
                                 `}
                               >
@@ -981,18 +1039,18 @@ export default function AdminPanel() {
                           })}
                         </div>
                         
-                        <div className="mt-4 text-sm text-gray-600">
-                          <div className="flex items-center space-x-4">
+                        <div className="mt-3 md:mt-4 text-xs md:text-sm text-gray-600">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-2 sm:space-y-0">
                             <div className="flex items-center">
-                              <div className="w-4 h-4 bg-blue-500 rounded mr-2"></div>
+                              <div className="w-3 h-3 md:w-4 md:h-4 bg-blue-500 rounded mr-2"></div>
                               <span>Selected</span>
                             </div>
                             <div className="flex items-center">
-                              <div className="w-4 h-4 bg-yellow-100 rounded mr-2"></div>
+                              <div className="w-3 h-3 md:w-4 md:h-4 bg-yellow-100 rounded mr-2"></div>
                               <span>Confirmed</span>
                             </div>
                             <div className="flex items-center">
-                              <div className="w-4 h-4 bg-red-100 rounded mr-2"></div>
+                              <div className="w-3 h-3 md:w-4 md:h-4 bg-red-100 rounded mr-2"></div>
                               <span>Pending</span>
                             </div>
                           </div>

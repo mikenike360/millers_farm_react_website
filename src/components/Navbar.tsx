@@ -19,11 +19,11 @@ export default function Navbar() {
     <div 
       className="navbar fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out py-0 bg-gradient-to-r from-primary-600/95 to-secondary-600/95 backdrop-blur-md shadow-soft"
     >
-      <div className="container mx-auto px-4 flex items-center justify-between">
-        {/* Left Section: Mobile Hamburger and Desktop Logo */}
-        <div className="flex items-center">
-          {/* Mobile: Hamburger icon */}
-          <div className="dropdown lg:hidden">
+      <div className="container mx-auto px-4">
+        {/* Mobile Layout */}
+        <div className="flex items-center justify-center lg:hidden relative">
+          {/* Mobile: Hamburger icon - positioned absolute left */}
+          <div className="dropdown absolute left-4">
             <label tabIndex={0} className="btn btn-ghost btn-circle hover:bg-white/20 transition-all duration-300">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -67,26 +67,9 @@ export default function Navbar() {
               ))}
             </ul>
           </div>
-          
-          {/* Desktop: Logo on left */}
-          <Link href="/" className="hidden md:flex items-center ml-2 py-0 group">
-            <div className="relative overflow-hidden rounded-2xl">
-              <Image
-                src="/logo.png"
-                alt="Miller's Farm Logo"
-                width={120}
-                height={120}
-                className="object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-2"
-                priority
-              />
-            </div>
-          </Link>
-        </div>
 
-        {/* Center Section: Mobile Logo or Desktop Navigation Links */}
-        <div className="flex-1 flex justify-center">
           {/* Mobile: Centered Logo */}
-          <Link href="/" className="block md:hidden group">
+          <Link href="/" className="group ml-32">
             <div className="relative overflow-hidden rounded-2xl">
               <Image
                 src="/logo.png"
@@ -98,9 +81,26 @@ export default function Navbar() {
               />
             </div>
           </Link>
+        </div>
+
+        {/* Desktop Layout */}
+        <div className="hidden lg:flex items-center justify-between">
+          {/* Desktop: Logo on left */}
+          <Link href="/" className="flex items-center ml-2 py-0 group">
+            <div className="relative overflow-hidden rounded-2xl">
+              <Image
+                src="/logo.png"
+                alt="Miller's Farm Logo"
+                width={120}
+                height={120}
+                className="object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-2"
+                priority
+              />
+            </div>
+          </Link>
           
           {/* Desktop: Navigation Links */}
-          <div className="hidden lg:block">
+          <div className="flex-1 flex justify-center">
             <ul className="menu menu-horizontal px-1 space-x-2">
               {[
                 { href: "/", label: "Home" },
@@ -124,11 +124,9 @@ export default function Navbar() {
               ))}
             </ul>
           </div>
-        </div>
 
-        {/* Right Section: Theme Toggle */}
-        <div className="flex items-center">
-          {/* Removed Theme Toggle Button */}
+          {/* Desktop: Empty div for balance */}
+          <div className="w-12"></div>
         </div>
       </div>
     </div>
